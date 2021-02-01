@@ -50,18 +50,9 @@ Our solution will help the health authorities for quick, secure and efficient va
 - Git
 - Github
 
-## Screenshots
-
-  <img src="https://github.com/sahil9001/VaxU_Codebreak_2.0/blob/main/web/snapshots/VaxU_1.png">
-  <img src="https://github.com/sahil9001/VaxU_Codebreak_2.0/blob/main/web/snapshots/VaxU_2.png">
-  <img src="https://github.com/sahil9001/VaxU_Codebreak_2.0/blob/main/web/snapshots/VaxU_3.png">
-  <img src="https://github.com/sahil9001/VaxU_Codebreak_2.0/blob/main/web/snapshots/VaxU_4.png">
-  <img src="https://github.com/sahil9001/VaxU_Codebreak_2.0/blob/main/web/snapshots/VaxU_5.png">
-  
 ## Our Team
 
-* Aryan Sarkar
 * Sahil Silare
-* Sanjeeb Nath
+* Siddharth Mishra
 * Amitesh Agrawal
 
