@@ -201,12 +201,13 @@ html.has-navbar-fixed-top {
 .signal-navbar .navbar-item,
 .signal-navbar .navbar-link {
 	color: #1b1b1b;
-	font-size: 18px;
+	font-size: 17px;
     font-family: 'Open Sans', sans-serif;
 }
 
 .navbar-item{
    margin-left: 50px;
+   color: #2aed53
 }
 
 .navbar-menu .navbar-item #login{
