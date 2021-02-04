@@ -201,7 +201,20 @@ html.has-navbar-fixed-top {
 .signal-navbar .navbar-item,
 .signal-navbar .navbar-link {
 	color: #1b1b1b;
-	font-size: 16px
+	font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.navbar-item{
+   margin-left: 50px;
+}
+
+.navbar-menu .navbar-item #login{
+    margin-left: 400px;
+}
+
+.navbar-menu .navbar-item  #register{
+    margin-left: -40px;
 }
 
 .navbar-link:not(.is-arrowless)::after {
@@ -233,7 +246,11 @@ html.has-navbar-fixed-top {
 }
 
 .hero.hero-main {
-	background-color: #5cbe58;
+/*	background-color: #5cbe58;*/
+     background: rgb(2,0,36);
+    background: -webkit-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: -o-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
 	color: #1b1b1b;
 	max-height: 760px
 }
@@ -834,7 +851,10 @@ html[dir=rtl] .signal-navbar .language-selector .icon {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #fff;
+  background: rgb(2,0,36);
+    background: -webkit-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: -o-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
   /* change if the mask should have another color then white */
   z-index: 99;
   /* makes sure it stays on top */
@@ -848,7 +868,11 @@ html[dir=rtl] .signal-navbar .language-selector .icon {
   /* centers the loading animation horizontally one the screen */
   top: 50%;
   /* centers the loading animation vertically one the screen */
-  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
+    background: rgb(2,0,36);
+    background: -webkit-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: -o-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+  background-image: url(https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif);
   /* path to your loading animation */
   background-repeat: no-repeat;
   background-position: center;
