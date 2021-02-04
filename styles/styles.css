@@ -825,33 +825,3 @@ html[dir=rtl] .signal-navbar .language-selector .icon {
 	font-display: swap;
 	src: local("Inter-ExtraBold"), url(/assets/inter/Inter-ExtraBold-74e72c6bbb7844899343c4783be9b4510e32951636acde44d5b4725e2132ea03.woff2) format("woff2"), url(/assets/inter/Inter-ExtraBold-585b4ce19c2d757e2f9f6925a280650188bd2a49e7613f687dabdb15543e17eb.woff) format("woff")
 }
-
-
-
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  /* change if the mask should have another color then white */
-  z-index: 99;
-  /* makes sure it stays on top */
-}
-
-#status {
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  left: 50%;
-  /* centers the loading animation horizontally one the screen */
-  top: 50%;
-  /* centers the loading animation vertically one the screen */
-  background-image: url(https://raw.githubusercontent.com/niklausgerber/PreLoadMe/master/img/status.gif);
-  /* path to your loading animation */
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: -100px 0 0 -100px;
-  /* is width and height divided by two */
-}
