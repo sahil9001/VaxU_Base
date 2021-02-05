@@ -206,17 +206,10 @@ html.has-navbar-fixed-top {
 }
 
 .navbar-item{
-   margin-left: 50px;
    color: #2aed53
 }
 
-.navbar-menu .navbar-item #login{
-    margin-left: 400px;
-}
 
-.navbar-menu .navbar-item  #register{
-    margin-left: -40px;
-}
 
 .navbar-link:not(.is-arrowless)::after {
 	border-color: #1b1b1b
