@@ -835,6 +835,7 @@ html[dir=rtl] .signal-navbar .language-selector .icon {
 	font-weight: 800;
 	font-display: swap;
 	src: local("Inter-ExtraBold"), url(/assets/inter/Inter-ExtraBold-74e72c6bbb7844899343c4783be9b4510e32951636acde44d5b4725e2132ea03.woff2) format("woff2"), url(/assets/inter/Inter-ExtraBold-585b4ce19c2d757e2f9f6925a280650188bd2a49e7613f687dabdb15543e17eb.woff) format("woff")
+<<<<<<< HEAD
 }
 
 
@@ -873,3 +874,6 @@ html[dir=rtl] .signal-navbar .language-selector .icon {
   margin: -100px 0 0 -100px;
   /* is width and height divided by two */
 }
+=======
+}
+>>>>>>> 9a5819a31442df1e943f6c589ff4bf3ab122482d

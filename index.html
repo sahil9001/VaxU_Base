@@ -17,11 +17,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     </head>
         <body>
-        <!-- ***** Preloader Start ***** -->
-        <div id="preloader">
-          <div id="status">&nbsp;</div>
-        </div>
-        <!-- ***** Preloader End ***** -->
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -63,18 +58,11 @@
                     </a>
                   </div>
                 </div>
-                <div class="navbar-item">
-                  <div class="buttons">
-                    <a class="button is-light">
-                      Sign Up
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
             </div>
           </nav>
-          <section class="hero-main hero"  style="border-bottom-right-radius: 30%;">
+          <section class="hero-main hero">
             <div class="hero-body">
             <div class="container">
                 <div class="columns">
@@ -93,18 +81,8 @@
                     </div>
                 </div>
             </div>
-            </div>
           </section>
-          <section id="whyus" class="why-signal section">
-              <div class="container">
-                  <div class="columns is-centered">
-                      <div class="column has-text-centered">
-                          <h2>Why use VaxU?</h2>
-                          <p class="body1">Explore below to see why VaxU is your all in one COVID app!</p>
-                      </div>
-                  </div>
-              </div>
-          </section>
+          <section id="whyus" class="why-signal section"><div class="container"><div class="columns is-centered"><div class="column has-text-centered"><h2>Why use VaxU?</h2><p class="body1">Explore below to see why VaxU is your all in one COVID app!</p></div></div></div></section>
           <section class="section features">
           <div class="container">
               <div class="columns is-centered">
@@ -158,8 +136,7 @@
                 </div>
               </div>
           </div>
-          <!--</div>
-          -->
+          </div>
           </section>
           <footer class="footer">
             <div class="container">
@@ -174,14 +151,6 @@
                 </div>
               </div>
             </div>
-          </footer>
-          <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-          <script>
-              $(window).on('load', function() { // makes sure the whole site is loaded 
-  $('#status').fadeOut(); // will first fade out the loading animation 
-  $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
-  $('body').delay(350).css({'overflow':'visible'});
-})
-          </script>
+          </footer> 
     </body>
 </html>
