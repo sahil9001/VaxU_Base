@@ -201,8 +201,15 @@ html.has-navbar-fixed-top {
 .signal-navbar .navbar-item,
 .signal-navbar .navbar-link {
 	color: #1b1b1b;
-	font-size: 16px
+	font-size: 17px;
+    font-family: 'Open Sans', sans-serif;
 }
+
+.navbar-item{
+   color: #2aed53
+}
+
+
 
 .navbar-link:not(.is-arrowless)::after {
 	border-color: #1b1b1b
@@ -233,7 +240,11 @@ html.has-navbar-fixed-top {
 }
 
 .hero.hero-main {
-	background-color: #5cbe58;
+/*	background-color: #5cbe58;*/
+     background: rgb(2,0,36);
+    background: -webkit-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: -o-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
 	color: #1b1b1b;
 	max-height: 760px
 }
@@ -824,4 +835,41 @@ html[dir=rtl] .signal-navbar .language-selector .icon {
 	font-weight: 800;
 	font-display: swap;
 	src: local("Inter-ExtraBold"), url(/assets/inter/Inter-ExtraBold-74e72c6bbb7844899343c4783be9b4510e32951636acde44d5b4725e2132ea03.woff2) format("woff2"), url(/assets/inter/Inter-ExtraBold-585b4ce19c2d757e2f9f6925a280650188bd2a49e7613f687dabdb15543e17eb.woff) format("woff")
+}
+
+
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(2,0,36);
+    background: -webkit-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: -o-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+  /* change if the mask should have another color then white */
+  z-index: 99;
+  /* makes sure it stays on top */
+}
+
+#status {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  /* centers the loading animation horizontally one the screen */
+  top: 50%;
+  /* centers the loading animation vertically one the screen */
+    background: rgb(2,0,36);
+    background: -webkit-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: -o-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+    background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(42,237,83,1) 0%, rgba(0,212,255,1) 74%);
+  background-image: url(https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif);
+  /* path to your loading animation */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -100px 0 0 -100px;
+  /* is width and height divided by two */
 }
