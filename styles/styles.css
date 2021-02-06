@@ -428,14 +428,14 @@ html.has-navbar-fixed-top {
 }
 
 .icon {
-	background-repeat: no-repeat;
-	height: 16px;
-	width: 16px
+	background-repeat: no-repeat !important;
+	height: 16px !important;
+	width: 16px !important
 }
 
 .icon-3x {
-	height: 40px;
-	width: 40px
+	height: 40px !important;
+	width: 40px i !important
 }
 
 .icon-external-link-alt {
