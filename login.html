@@ -139,13 +139,10 @@
                         var obj = JSON.parse(response);
                         console.log(obj);
                         key = obj.token;
-                        localStorage.setItem('token', key);
+                        localStorage.setItem(email, key);
                         console.log('token is : ' + key);
                         success(userName);
                     }
-                    /*else{
-                        alert("Error : " + request.readyState);
-                    }*/
                 }
                 var data = {
                     "email"  : email,
@@ -161,16 +158,12 @@
             getToken(urlToHit, userName, password);
         }
         function success(userName){
-            curr_url = location.href;
+            //curr_url = location.href;
+            var name = "username=" + userName;
+            document.cookie = name;
             location.href = "http://" + host + "/dashboard.html";
-            document.getElementById("").innerHTML = userName;
-            console.log('Hi');
-        }
-        
-        function logout(){
-            localStorage.removeItem('token');
         }
         </script>
-    <!--<script language="JavaScript" type="text/javascript" src="styles/app.js"></script>-->
+   <!-- <script language="JavaScript" type="text/javascript" src="styles/app.js"></script>-->
   </body>
 </html>

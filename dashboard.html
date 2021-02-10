@@ -17,6 +17,15 @@
     <link rel="stylesheet" href="styles/styles.css" />
     <script src="https://use.fontawesome.com/36f44874b6.js"></script>
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+    <script>
+        var exists = localStorage.length;
+        if(!exists)
+            {
+                alert("You need to login first!");
+                var host = "127.0.0.1:8080";
+                window.location.href = "http://" + host;            
+            }
+    </script>
   </head>
   <body>
 
@@ -50,19 +59,23 @@
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-end">
+          <div class="navbar-start">
             <a class="navbar-item"> Home </a>
             <a class="navbar-item" href="#whyus"> Why VaxU? </a>
             <a class="navbar-item"> Home </a>
-
             <a class="navbar-item"> Get VaxU </a>
-
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-light"> Log in </a>
-              </div>
-            </div>
           </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+                <p id="welcome">Welcome</p>&nbsp;
+                <p id="user_name"></p>
+            </div>
+             <div class="navbar-item">
+              <div class="buttons">
+                <button class="button is-link" onclick="logout()">Log Out</button>
+              </div>
+             </div>
+            </div>
         </div>
       </div>
     </nav>
@@ -177,8 +190,112 @@
         </div>
       </div>
     </footer>
+    <script src="styles/jquery-3.5.1.js"></script>
     <script>
-        const webcamElement = document.getElementById('webcam');
+        var host = "127.0.0.1:8080";
+            console.log(typeof(document.cookie));
+            var name = getCookie('username');
+            console.log(name);
+            document.getElementById("user_name").innerHTML = name;
+            function getCookie(cname) {
+              var name = cname + "=";
+              var decodedCookie = decodeURIComponent(document.cookie);
+              var ca = decodedCookie.split(';');
+              for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+                }
+              }
+              return "";
+            }
+            const webcamElement = document.getElementById('webcam');
+            const canvasElement = document.getElementById('canvas');
+            const snapSoundElement = document.getElementById('snapSound');
+            const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
+            function startWebcam() {
+                webcam.start()
+               .then(result =>{
+                  console.log("webcam started");
+               })
+               .catch(err => {
+                   console.log(err);
+               });
+            }
+            function takeSnap(){
+                let picture = webcam.snap();
+                document.querySelector('#download-photo').href = picture;
+            }
+
+            function flipCamera(){
+                $('#cameraFlip').click(function() {
+                webcam.flip();
+                webcam.start();
+            });
+            }
+            function submit(){
+                var canvas = document.getElementById('canvas');
+                
+            }
+
+            function stopWebcam(){
+                webcam.stop();
+            }
+            $(document).ready(function () {
+                function getvalues(){
+                var urlToHit = "http://20.198.3.123/api/core/";
+                var request = new XMLHttpRequest();
+                var token = localStorage.getItem(name);
+                request.open("GET", urlToHit, true);
+                request.setRequestHeader("Content-type", "application/json");
+                request.setRequestHeader("Authorization", token);
+                request.onreadystatechange = function() {
+                    if(request.readyState == 4 && request.status == 200){
+                        var response = request.responseText;
+                        var obj = JSON.parse(response);
+                        console.log(obj.vaccines_available);
+                        console.log(obj.price);
+                        console.log(obj.is_available);
+                        document.getElementById('vaccinesLeft').innerHTML = obj.vaccines_available;
+                        document.getElementById('priceOfVaccine').innerHTML = obj.price;
+                        document.getElementById('availablityStatus').innerHTML = obj.is_available;
+                }
+            }
+                request.send();
+            }
+            getvalues();
+            });
+            /*function getvalues(){
+                var urlToHit = "http://20.198.3.123/api/core/";
+                var request = new XMLHttpRequest();
+                var token = localStorage(name.stringify());
+                request.open("GET", urlToHit, true);
+                request.setRequestHeader("Content-type", "application/json");
+                request.setRequestHeader("Authorization", token);
+                request.onreadystatechange = function() {
+                    if(request.readyState == 4 && request.status == 200){
+                        var response = request.responseText;
+                        var obj = JSON.parse(response);
+                        console.log(obj.vaccines_available);
+                        console.log(obj.price);
+                        console.log(obj.is_available);
+                        document.getElementById('vaccinesLeft').innerHTML = obj.vaccines_available;
+                        document.getElementById('priceOfVaccine').innerHTML = obj.price;
+                        document.getElementById('availablityStatus').innerHTML = obj.is_available;
+                }
+            }
+                request.send();
+            }
+            getvalues();*/
+            function logout(){
+                console.log(name);
+                localStorage.removeItem(name);
+                window.location = "http://" + host + "/";
+            }                       
+        /*const webcamElement = document.getElementById('webcam');
         const canvasElement = document.getElementById('canvas');
         const snapSoundElement = document.getElementById('snapSound');
         const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
@@ -224,12 +341,13 @@
                 document.getElementById('priceOfVaccine').innerHTML = obj.price;
                 document.getElementById('availablityStatus').innerHTML = obj.is_available;
             }
-            else{
-                alert("Error : " + request.readyState);
-            }
         }
         request.send();
+        function logout(){
+            localStorage.removeItem('token');
+            window.location = "http://" + host + "/index.html";
+        }*/
     </script>
-   <!-- <script language="JavaScript" type="text/javascript" src="styles/app.js"></script>-->
+<!--    <script language="JavaScript" type="text/javascript" src="styles/app.js"></script>-->
   </body>
 </html>

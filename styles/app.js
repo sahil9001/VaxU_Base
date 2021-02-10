@@ -79,27 +79,102 @@ function getToken(url, clientID, clientSecret) {
     }
 }
 */
+/************************************************* login html ***************************************/
+var host = "127.0.0.1:8080";
+       function trylogin(){
+            var _token;
+            var userName = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var urlToHit = "http://20.198.3.123:80/api/users/vacc/login/";
+            var request = new XMLHttpRequest();
 
-var _token;
-var userName = document.getElementById('login').value;
-var password = document.getElementById('password').value;
-var urlToHit = "http://20.198.3.123/api/users/vacc/login/";
-var request = new XMLHttpRequest();
-
-function getToken(urlToHit, cliendID, clientSecret){
-    var key;
-    request.open("POST", url, true, userName, password);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send("grant_type=client_credentials&client_id="+clientID+"&"+"client_secret="+clientSecret);
-    request.onreadystatechange = function() {
-        if(request.readyState == 4 && request.status == 200){
-            var response = request.responseText;
-            var obj = JSON.parse(response);
-            key = obj.access_token;
-            _token = key;
+            function getToken(urlToHit, email, password){
+                var key;
+                request.open("POST", urlToHit, true);
+                request.setRequestHeader("Content-type", "application/json");
+                request.onreadystatechange = function() {
+                    if(request.readyState == 4 && request.status == 202){
+                        var response = request.responseText;
+                        var obj = JSON.parse(response);
+                        console.log(obj);
+                        key = obj.token;
+                        localStorage.setItem('token', key);
+                        console.log('token is : ' + key);
+                        success(userName);
+                    }
+                    /*else{
+                        alert("Error : " + request.readyState);
+                    }*/
+                }
+                var data = {
+                    "email"  : email,
+                    "password" : password
+                };
+                console.log(data);
+                request.send(JSON.stringify(data));
+                console.log(request.status);
+                console.log('Hi');
+                
+            }
+            //request.withCredentials = true;
+            getToken(urlToHit, userName, password);
         }
-    }
-}
+        function success(userName){
+            curr_url = location.href;
+            location.href = "http://" + host + "/dashboard.html";
+            document.getElementById("user_name").innerHTML = userName;
+            console.log('Hi');
+        }
+        
+        function logout(){
+            localStorage.removeItem('token');
+        }
+/**************************************** dashboard html  *******************************/
+const webcamElement = document.getElementById('webcam');
+        const canvasElement = document.getElementById('canvas');
+        const snapSoundElement = document.getElementById('snapSound');
+        const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
+        function startWebcam() {
+            webcam.start()
+           .then(result =>{
+              console.log("webcam started");
+           })
+           .catch(err => {
+               console.log(err);
+           });
+        }
+        function takeSnap(){
+            let picture = webcam.snap();
+            document.querySelector('#download-photo').href = picture;
+        }
 
-getToken(urlToHit, userName, password);
-
+        function flipCamera(){
+            $('#cameraFlip').click(function() {
+            webcam.flip();
+            webcam.start();
+        });
+        }
+        function submit(){
+            var canvas = document.getElementById('canvas');
+            
+        }
+        
+        function stopWebcam(){
+            webcam.stop();
+        }
+        var urlToHit = "http://20.198.3.123/api/core/";
+        var request = new XMLHttpRequest();
+        var token = localStorage('token');
+        request.open("GET", urlToHit, true);
+        request.setRequestHeader("Content-type", "application/json");
+        request.setRequestHeader("Authorization", token);
+        request.onreadystatechange = function() {
+            if(request.readyState == 4 && request.status == 200){
+                var response = request.responseText;
+                var obj = JSON.parse(response);
+                document.getElementById('vaccinesLeft').innerHTML = obj.vaccines_available;
+                document.getElementById('priceOfVaccine').innerHTML = obj.price;
+                document.getElementById('availablityStatus').innerHTML = obj.is_available;
+            }
+        }
+        request.send();
