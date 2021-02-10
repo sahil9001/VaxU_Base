@@ -121,6 +121,7 @@
       </div>
     </footer>
     <script>
+        var host = "127.0.0.1:8080";
        function trylogin(){
             var _token;
             var userName = document.getElementById('username').value;
@@ -159,10 +160,9 @@
             //request.withCredentials = true;
             getToken(urlToHit, userName, password);
         }
-        
         function success(userName){
             curr_url = location.href;
-           // location.href = "http://127.0.0.1:56830/dashboard.html";
+            location.href = "http://" + host + "/dashboard.html";
             document.getElementById("").innerHTML = userName;
             console.log('Hi');
         }
