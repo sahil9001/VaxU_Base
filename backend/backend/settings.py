@@ -126,6 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 <<<<<<< HEAD
+<<<<<<< HEAD
 enable_utc = True
 timezone = "Asia/Kolkata"
 
@@ -140,15 +141,23 @@ CELERY_TIMEZONE = 'Asia/Kolkata'
 
 
 >>>>>>> bd8513bbe857b375707b9fa74fbf40cb989d0c8a
+=======
+
+
+>>>>>>> 40f971c04fead31a5e748bd5a483d65a7cfb3077
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 TIME_ZONE = 'UTC'
 >>>>>>> bd8513bbe857b375707b9fa74fbf40cb989d0c8a
+=======
+TIME_ZONE = 'UTC'
+>>>>>>> 40f971c04fead31a5e748bd5a483d65a7cfb3077
 
 USE_I18N = True
 
