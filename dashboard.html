@@ -431,6 +431,7 @@
                 const files = document.querySelector('[type=file]').files;
                 var file = files[0];
                 const formData = new FormData();
+                if(userList.length > 0){
                   var id = userList[0].patient_id;
                   var token = localStorage.getItem(name);
                   formData.append('clicked_photo', file);
@@ -451,6 +452,10 @@
                   .catch(error => {
                     toastr.error(error)
                   });
+                }
+                else{
+                    toastr.error("User List is empty");
+                }
             }
         }
         
@@ -470,7 +475,7 @@
                 })
                 .then(res => res.json())
                 .then(data =>{
-                    toastr.success("Successfully Vaccinated!s")
+                    toastr.success("Successfully Vaccinated !")
                 })
                 .catch(error => {
                     toastr.error("User does not exists or already vaccinated!")
