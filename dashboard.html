@@ -89,7 +89,7 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="vaccine_image">
+                            <img src="assets/img/vaccines-image-edit.jpg" alt="vaccine_image">
                         </figure>
                     </div>
                     <div class="card-content">
@@ -104,7 +104,8 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="vaccine_image">
+                            <img src="assets/img/cost-vaccine.jpg" alt="vaccine_image">
+                           <!-- https://bulma.io/images/placeholders/1280x960.png-->
                         </figure>
                     </div>
                     <div class="card-content">
@@ -119,7 +120,7 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="vaccine_image">
+                            <img src="assets/img/available2.png" alt="vaccine_image">
                         </figure>
                     </div>
                     <div class="card-content">
@@ -140,13 +141,13 @@
                       <div class="card">
                               <div class="card-content">
                                  <div class="media-content">
-                                      <p class="title is-4">User List : </p>
-                                      <table class="table">
+                                      <p class="title is-4 has-text-centered">User List : </p>
+                                      <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                                          <thead>
                                           <tr>
-                                              <th>Id</th>
-                                              <th>Name</th>
-                                              <th>Timeslot</th>
+                                              <th class="has-text-centered">Id</th>
+                                              <th class="has-text-centered">Name</th>
+                                              <th class="has-text-centered">Timeslot</th>
                                           </tr>
                                           </thead>
                                           <tbody id="getList">
@@ -155,15 +156,25 @@
                                   </div>
                               </div>
                       </div>
+                  <div class="column"></div> <!-- div for proper spacing -->
+                      <div class="column">
+                         <p class="subtitle">Enter vaccinated person's id :</p>
+                          <textarea class="textarea" placeholder="Enter id"></textarea>
+                          <div class="buttons is-centered">
+                              <button class="button is-success is-medium mt-4" onclick="isVaccinated()" id="vaccinated">Submit ID</button>
+                          </div>
+                      </div>
                   </div>
                   <div class="column is-three-fifths">
                         <button type="button" class="button is-primary" id="button1" onclick="startWebcam()" style="margin-left: 50px;">Start the Webcam!</button>
                         <button class="button is-primary" id="button2" onclick="takeSnap()" style="margin-left: 100px;">Take picture!</button>
                         <button class="button is-primary" id="button3" onclick="stopWebcam()" style="margin-left: 100px">Stop the Webcam!</button>
                         <video id="webcam" autoplay playsinline  width="640" height="480" style="margin-left: 65px; margin-top: 50px; border: 1px solid black;"></video>
-                        <canvas id="canvas" class="" style="display: none; margin-left: 65px; margin-top: 50px; border: 1px solid black;"></canvas>
+                        <canvas id="canvas" class="" style="margin-left: 65px; margin-top: 50px; border: 1px solid black; border: none;"></canvas>
                         <audio id="snapSound" src="assets/camera-shutter-click-01.wav" preload = "auto"></audio>
-                        <input type="file" id="fileUpload" >
+                        <div class="column is-offset-4">
+                            <a id="download-photo" download="patientImage.png">Download the image!</a>
+                        </div>
                         <!--<div class="file">
                           <label class="file-label">
                             <input class="file-input" type="file" name="resume" id="fileUpload">
@@ -179,11 +190,13 @@
                             </span>
                           </label>
                         </div>-->
-                        <a id="download-photo" download="patientImage.png">Download the image!</a>
+                        <div class="column is-offset-4">
+                            <input type="file" id="fileUpload" >
+                        </div>
                   </div>
               </div>
               <div class="buttons is-centered">
-              <button class="button is-success is-medium" onclick="submitDetails()" id="submit">Submit!</button>
+              <button class="button is-success is-medium" onclick="submitDetails()" id="submit">Submit Image</button>
               </div>
           </div>
       </section>
@@ -411,7 +424,7 @@
         
         function submitDetails() {
             if(document.getElementById("fileUpload").value == "" ){
-                toastr.info("no files selected");
+                toastr.info("Please select an image first!");
                   console.log('no files selected');
               }
             else{
@@ -439,6 +452,44 @@
                     toastr.error(error)
                   });
             }
+        }
+        
+        function isVaccinated(){
+            var host = "http://20.198.3.123/api/core/vaccinated/";
+            var id = $('textarea').val();
+            console.log(userList);
+                console.log({id});
+                host = host + id + "/";
+                var token = localStorage.getItem(name);
+                console.log(host);
+                fetch(host, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization' : token
+                    }
+                })
+                .then(res => res.json())
+                .then(data =>{
+                    toastr.success("Successfully Vaccinated!s")
+                })
+                .catch(error => {
+                    toastr.error("User does not exists or already vaccinated!")
+                });
+              /*  $.ajax({
+                    type: "GET",
+                    url: host,
+                    headers: {
+                        'Authorization': token
+                    },
+                    success: function(res){
+                        toastr.success(res);
+                    },
+                    error: function(error){
+                        toastr.error(error);
+                        console.log(error);
+                    }
+                });*/
+                loadUsers();
         }
         
           /*  var dataURL = canvasElement.toDataURL();

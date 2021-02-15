@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/logo_r_resumme.png" type="image/x-icon" />
+    <title>Log In</title>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="assets/css/main.css">
+  </head>
+  <body>
+    <div class="columns is-vcentered">
+      <div class="login column is-4">
+        <section class="section">
+          <div class="has-text-centered">
+              <img class="login-logo" src="assets/logo/VaxU_Logo.png">
+          </div>
+
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-right">
+              <input class="input" type="text" id="username">
+              <span class="icon is-small is-right">
+                <i class="fa fa-user"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-right">
+              <input class="input" type="password" id="password">
+              <span class="icon is-small is-right">
+                <i class="fa fa-key"></i>
+              </span>
+            </div>
+          </div>
+          <div class="has-text-centered">
+            <a class="button is-vcentered is-primary is-outlined" onclick="trylogin()">Login</a>
+          </div>
+        </section>
+      </div>
+      <div id="particles-js" class="interactive-bg column is-8">
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-two-fifths is-hidden-mobile">
+            <span class="copyright"> Made by Team --- </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+        var host = "127.0.0.1:8080";
+       function trylogin(){
+            var _token;
+            var userName = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var urlToHit = "http://20.198.3.123:80/api/users/vacc/login/";
+            var request = new XMLHttpRequest();
+
+            function getToken(urlToHit, email, password){
+                var key;
+                request.open("POST", urlToHit, true);
+                request.setRequestHeader("Content-type", "application/json");
+                request.onreadystatechange = function() {
+                    if(request.readyState == 4 && request.status == 202){
+                        var response = request.responseText;
+                        var obj = JSON.parse(response);
+                        console.log(obj);
+                        key = obj.token;
+                        localStorage.setItem(email, key);
+                        console.log('token is : ' + key);
+                        success(userName);
+                    }
+                }
+                var data = {
+                    "email"  : email,
+                    "password" : password
+                };
+                console.log(data);
+                request.send(JSON.stringify(data));
+                console.log(request.status);
+                console.log('Hi');
+                
+            }
+            //request.withCredentials = true;
+            getToken(urlToHit, userName, password);
+        }
+        function success(userName){
+            //curr_url = location.href;
+            var name = "username=" + userName;
+            document.cookie = name;
+            location.href = "http://" + host + "/dashboard.html";
+        }
+        </script>
+  </body>
+</html>
