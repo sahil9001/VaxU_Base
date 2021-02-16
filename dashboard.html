@@ -14,7 +14,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="styles/toastr.min.css">
     <link rel="stylesheet" href="styles/styles.css" />
+    <script src="styles/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://use.fontawesome.com/36f44874b6.js"></script>
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <script>
@@ -86,13 +89,13 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="vaccine_image">
+                            <img src="assets/img/vaccines-image-edit.jpg" alt="vaccine_image">
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media-content">
                         <p class="title is-4">Number of Vaccines left:</p>
-                        <h2 id="vaccinesLeft">14</h2>
+                        <h2 id="vaccinesLeft"></h2>
                         </div>
                     </div>
                 </div>
@@ -101,13 +104,14 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="vaccine_image">
+                            <img src="assets/img/cost-vaccine.jpg" alt="vaccine_image">
+                           <!-- https://bulma.io/images/placeholders/1280x960.png-->
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media-content">
                         <p class="title is-4">Cost per Vaccine:</p>
-                        <h2 id="priceOfVaccine">14</h2>
+                        <h2 id="priceOfVaccine"></h2>
                         </div>
                     </div>
                 </div>
@@ -116,13 +120,13 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="vaccine_image">
+                            <img src="assets/img/available2.png" alt="vaccine_image">
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media-content">
                         <p class="title is-4">Status:</p>
-                        <h2 id="availabitlityStatus">Available</h2>
+                        <h2 id="availabilityStatus"></h2>
                         </div>
                     </div>
                 </div>
@@ -137,22 +141,28 @@
                       <div class="card">
                               <div class="card-content">
                                  <div class="media-content">
-                                      <p class="title is-4">User List : </p>
-                                      <ul>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                          <li>abc</li>
-                                      </ul>
+                                      <p class="title is-4 has-text-centered">User List : </p>
+                                      <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+                                         <thead>
+                                          <tr>
+                                              <th class="has-text-centered">Id</th>
+                                              <th class="has-text-centered">Name</th>
+                                              <th class="has-text-centered">Timeslot</th>
+                                          </tr>
+                                          </thead>
+                                          <tbody id="getList">
+                                          </tbody>
+                                      </table>
                                   </div>
                               </div>
+                      </div>
+                  <div class="column"></div> <!-- div for proper spacing -->
+                      <div class="column">
+                         <p class="subtitle">Enter vaccinated person's id :</p>
+                          <textarea class="textarea" placeholder="Enter id" cols="10"></textarea>
+                          <div class="buttons is-centered">
+                              <button class="button is-success is-medium mt-4" onclick="isVaccinated()" id="vaccinated">Submit ID</button>
+                          </div>
                       </div>
                   </div>
                   <div class="column is-three-fifths">
@@ -160,12 +170,33 @@
                         <button class="button is-primary" id="button2" onclick="takeSnap()" style="margin-left: 100px;">Take picture!</button>
                         <button class="button is-primary" id="button3" onclick="stopWebcam()" style="margin-left: 100px">Stop the Webcam!</button>
                         <video id="webcam" autoplay playsinline  width="640" height="480" style="margin-left: 65px; margin-top: 50px; border: 1px solid black;"></video>
-                        <canvas id="canvas" class="" style="margin-left: 65px; margin-top: 50px; border: 1px solid black;"></canvas>
+                        <canvas id="canvas" class="" style="margin-left: 65px; margin-top: 50px; border: 1px solid black; border: none;"></canvas>
                         <audio id="snapSound" src="assets/camera-shutter-click-01.wav" preload = "auto"></audio>
+                        <div class="column is-offset-4">
+                            <a id="download-photo" download="patientImage.png">Download the image!</a>
+                        </div>
+                        <!--<div class="file">
+                          <label class="file-label">
+                            <input class="file-input" type="file" name="resume" id="fileUpload">
+                            <span class="file-cta">
+                              <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                              </span>
+                              <span class="file-label">
+                                Choose a file…
+                              </span>
+                              <span class="file-name">
+                                </span>
+                            </span>
+                          </label>
+                        </div>-->
+                        <div class="column is-offset-4">
+                            <input type="file" id="fileUpload" >
+                        </div>
                   </div>
               </div>
               <div class="buttons is-centered">
-              <button class="button is-success is-medium" onclick="submit()">Submit!</button>
+              <button class="button is-success is-medium" onclick="submitDetails()" id="submit">Submit Image</button>
               </div>
           </div>
       </section>
@@ -192,7 +223,62 @@
     </footer>
     <script src="styles/jquery-3.5.1.js"></script>
     <script>
+<<<<<<< HEAD
+        function toasterOptions() {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "100",
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "show",
+                "hideMethod": "hide"
+            };
+        };
+        toasterOptions();
+        
+        document.addEventListener('DOMContentLoaded', () => {
+          // 1. Display file name when select file
+          let fileInputs = document.querySelectorAll('.file.has-name');
+          for (let fileInput of fileInputs) {
+            let input = fileInput.querySelector('.file-input');
+            let name = fileInput.querySelector('.file-name');
+            input.addEventListener('change', () => {
+              let files = input.files;
+              if (files.length === 0) {
+                name.innerText = 'No file selected';
+              } else {
+                name.innerText = files[0].name;
+              }
+            });
+          }
+
+          // 2. Remove file name when form reset
+          let forms = document.getElementsByTagName('form');
+          for (let form of forms) {
+            form.addEventListener('reset', () => {
+              console.log('a');
+              let names = form.querySelectorAll('.file-name');
+              for (let name of names) {
+                name.innerText = 'No file selected';
+              }
+            });
+          }
+        });
+        
+            var userList;
+            var host = "127.0.0.1:8080";
+=======
         var host = "sahil9001.github.io/VaxU_Base";
+>>>>>>> e62d5561d090d4d142fc2658b90bf34fad565444
             console.log(typeof(document.cookie));
             var name = getCookie('username');
             console.log(name);
@@ -229,21 +315,29 @@
                 let picture = webcam.snap();
                 document.querySelector('#download-photo').href = picture;
             }
-
             function flipCamera(){
                 $('#cameraFlip').click(function() {
                 webcam.flip();
                 webcam.start();
             });
             }
-            function submit(){
-                var canvas = document.getElementById('canvas');
-                
-            }
 
             function stopWebcam(){
                 webcam.stop();
             }
+            function isCanvasBlank(canvas) {
+              return !canvas.getContext('2d')
+                .getImageData(0, 0, canvas.width, canvas.height).data
+                .some(channel => channel !== 0);
+            }
+            console.log(isCanvasBlank(canvasElement));
+            /*
+            function download() {
+            var dt = canvas.toDataURL('image/png');
+            this.href = dt;
+        };
+            downloadLnk.addEventListener('click', download, false);*/
+            
             $(document).ready(function () {
                 function getvalues(){
                 var urlToHit = "http://20.198.3.123/api/core/";
@@ -254,99 +348,226 @@
                 request.setRequestHeader("Authorization", token);
                 request.onreadystatechange = function() {
                     if(request.readyState == 4 && request.status == 200){
+                        
                         var response = request.responseText;
+                        console.log(typeof(response));
                         var obj = JSON.parse(response);
+                        console.log(typeof(obj));
                         console.log(obj.vaccines_available);
                         console.log(obj.price);
                         console.log(obj.is_available);
                         document.getElementById('vaccinesLeft').innerHTML = obj.vaccines_available;
                         document.getElementById('priceOfVaccine').innerHTML = obj.price;
-                        document.getElementById('availablityStatus').innerHTML = obj.is_available;
+                        document.getElementById('availabilityStatus').innerHTML = obj.is_available;
                 }
             }
                 request.send();
             }
             getvalues();
-            });
-            /*function getvalues(){
-                var urlToHit = "http://20.198.3.123/api/core/";
+                
+                function loadUsers(){
+                var urlToHit = "http://20.198.3.123/api/core/list/";
                 var request = new XMLHttpRequest();
-                var token = localStorage(name.stringify());
+                var token = localStorage.getItem(name);
                 request.open("GET", urlToHit, true);
                 request.setRequestHeader("Content-type", "application/json");
                 request.setRequestHeader("Authorization", token);
                 request.onreadystatechange = function() {
                     if(request.readyState == 4 && request.status == 200){
+                        //console.log(typeof(request));
                         var response = request.responseText;
-                        var obj = JSON.parse(response);
-                        console.log(obj.vaccines_available);
-                        console.log(obj.price);
-                        console.log(obj.is_available);
-                        document.getElementById('vaccinesLeft').innerHTML = obj.vaccines_available;
-                        document.getElementById('priceOfVaccine').innerHTML = obj.price;
-                        document.getElementById('availablityStatus').innerHTML = obj.is_available;
+                        var i, x="";  
+                        userList = JSON.parse(response);
+                        for(i = 0; i < userList.length; i++){
+                            x += "<tr><td>" + userList[i].patient_id + "</td><td>" + userList[i].patient + "</td><td>" + userList[i].timeslot + "</td></tr>";
+                        }
+                        document.getElementById('getList').innerHTML = x;
                 }
             }
-                request.send();
+            request.send();
             }
-            getvalues();*/
+                
+                loadUsers();
+                
+            });
+          
+       // function submitDetails(){
+            
+          var urlToHit = "http://20.198.3.123:80/api/core/check/";
+            
+          const handleImageUpload = event => {
+                  const files = event.target.files;
+                  const formData = new FormData();
+                  var id = userList[0].patient_id;
+                  var token = localStorage.getItem(name);
+                  formData.append('clicked_photo', files[0]);
+                  formData.append('patient_id', id);
+                  console.log(files[0]);
+                  console.log(id);
+                  fetch(urlToHit, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    },
+                    body: formData
+                  })
+                  .then(response => response.json())
+                  .then(json => {
+                    toastr.info(json)
+                  })
+                  .catch(error => {
+                    toastr.error(error)
+                  });
+          }
+
+        /*document.querySelector('#fileUpload').addEventListener('click', event => {
+          handleImageUpload(event)
+        });*/
+
+        console.log('submit started');
+        
+        function submitDetails() {
+            if(document.getElementById("fileUpload").value == "" ){
+                toastr.info("Please select an image first!");
+                  console.log('no files selected');
+              }
+            else{
+                const files = document.querySelector('[type=file]').files;
+                var file = files[0];
+                const formData = new FormData();
+                if(userList.length > 0){
+                  var id = userList[0].patient_id;
+                  var token = localStorage.getItem(name);
+                  formData.append('clicked_photo', file);
+                  formData.append('patient_id', id);
+                  console.log(file);
+                  console.log(id);
+                  fetch(urlToHit, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    },
+                    body: formData
+                  })
+                  .then(response => response.json())
+                  .then(json => {
+                    toastr.info(json)
+                  })
+                  .catch(error => {
+                    toastr.error(error)
+                  });
+                }
+                else{
+                    toastr.error("User List is empty");
+                }
+            }
+        }
+        
+        function isVaccinated(){
+            var host = "http://20.198.3.123/api/core/vaccinated/";
+            var id = $('textarea').val();
+            console.log(userList);
+                console.log({id});
+                host = host + id + "/";
+                var token = localStorage.getItem(name);
+                console.log(host);
+                fetch(host, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization' : token
+                    }
+                })
+                .then(res => res.json())
+                .then(data =>{
+                    toastr.success("Successfully Vaccinated !")
+                })
+                .catch(error => {
+                    toastr.error("User does not exists or already vaccinated!")
+                });
+              /*  $.ajax({
+                    type: "GET",
+                    url: host,
+                    headers: {
+                        'Authorization': token
+                    },
+                    success: function(res){
+                        toastr.success(res);
+                    },
+                    error: function(error){
+                        toastr.error(error);
+                        console.log(error);
+                    }
+                });*/
+                loadUsers();
+        }
+        
+          /*  var dataURL = canvasElement.toDataURL();
+            console.log(dataURL);
+            const fd = new FormData();
+            var blobBin = atob(dataURL.split(',')[1]);
+            var array = [];
+            for(var i = 0; i < blobBin.length; i++) {
+                array.push(blobBin.charCodeAt(i));
+            }
+            var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
+            console.log(file);
+            var id = userList[0].patient_id;
+            
+            fd.append("clicked_photo", file);
+            fd.append("patient_id", id);
+            $.ajax({
+               url: host,
+               type: "POST",
+               data: fd,
+               processData: false,
+               contentType: false,
+            }).done(function(respond){
+              alert(respond);
+            });*/
+            
+            /*fd.append('clicked_photo', dataURL);
+            var id = userList[0].patient_id;
+            console.log(id);
+            console.log(userList);
+            fd.append('patient_id', id);
+            console.log(fd);
+            var token = localStorage.getItem(name);
+            fetch(urlToHit, {
+                    method: 'POST',
+                    headers: {
+                        //'Content-type': 'application/json',
+                        'Authorization' : token
+                    }
+                    body: fd
+                })
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => toastr.error(err));*/
+//               console.log('submit started');
+//                var urlToHit = "http://20.198.3.123:80/api/core/check";
+//                //var canvas = document.getElementById('canvas');
+//                if(!isCanvasBlank(canvasElement))
+//                    {
+//                    let blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+//                      let response = await fetch(urlToHit, {
+//                        method: 'POST',
+//                        body: blob 
+//                      });
+//
+//                      // the server responds with confirmation and the image size
+//                      let result = await response.json();
+//                      alert(result.message);
+//                    }
+//                else{
+//                    console.log('trying toastr');
+//                    toastr.error('Please click an image first!');
+//                }
+            //}
             function logout(){
                 console.log(name);
                 localStorage.removeItem(name);
                 window.location = "http://" + host + "/";
             }                       
-        /*const webcamElement = document.getElementById('webcam');
-        const canvasElement = document.getElementById('canvas');
-        const snapSoundElement = document.getElementById('snapSound');
-        const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
-        function startWebcam() {
-            webcam.start()
-           .then(result =>{
-              console.log("webcam started");
-           })
-           .catch(err => {
-               console.log(err);
-           });
-        }
-        function takeSnap(){
-            let picture = webcam.snap();
-            document.querySelector('#download-photo').href = picture;
-        }
-
-        function flipCamera(){
-            $('#cameraFlip').click(function() {
-            webcam.flip();
-            webcam.start();
-        });
-        }
-        function submit(){
-            var canvas = document.getElementById('canvas');
-            
-        }
-        
-        function stopWebcam(){
-            webcam.stop();
-        }
-        var urlToHit = "http://20.198.3.123/api/core/";
-        var request = new XMLHttpRequest();
-        var token = localStorage('token');
-        request.open("GET", urlToHit, true);
-        request.setRequestHeader("Content-type", "application/json");
-        request.setRequestHeader("Authorization", token);
-        request.onreadystatechange = function() {
-            if(request.readyState == 4 && request.status == 200){
-                var response = request.responseText;
-                var obj = JSON.parse(response);
-                document.getElementById('vaccinesLeft').innerHTML = obj.vaccines_available;
-                document.getElementById('priceOfVaccine').innerHTML = obj.price;
-                document.getElementById('availablityStatus').innerHTML = obj.is_available;
-            }
-        }
-        request.send();
-        function logout(){
-            localStorage.removeItem('token');
-            window.location = "http://" + host + "/index.html";
-        }*/
     </script>
 <!--    <script language="JavaScript" type="text/javascript" src="styles/app.js"></script>-->
   </body>
