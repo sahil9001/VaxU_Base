@@ -80,7 +80,7 @@ function getToken(url, clientID, clientSecret) {
 }
 */
 /************************************************* login html ***************************************/
-var host = "127.0.0.1:8080";
+var host = "sahil9001.github.io/VaxU_Base/";
        function trylogin(){
             var _token;
             var userName = document.getElementById('username').value;

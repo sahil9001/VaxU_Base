@@ -62,7 +62,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'ekyc',
     'django_celery_beat',
-    'core'
+    'core',
+    'covidaudio'
 ]
 
 MIDDLEWARE = [
@@ -124,14 +125,39 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+<<<<<<< HEAD
+<<<<<<< HEAD
+enable_utc = True
+timezone = "Asia/Kolkata"
+
+CELERY_RESULT_BACKEND = 'db.sqlite3'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+=======
 
 
+>>>>>>> bd8513bbe857b375707b9fa74fbf40cb989d0c8a
+=======
+
+
+>>>>>>> 40f971c04fead31a5e748bd5a483d65a7cfb3077
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 TIME_ZONE = 'UTC'
+>>>>>>> bd8513bbe857b375707b9fa74fbf40cb989d0c8a
+=======
+TIME_ZONE = 'UTC'
+>>>>>>> 40f971c04fead31a5e748bd5a483d65a7cfb3077
 
 USE_I18N = True
 

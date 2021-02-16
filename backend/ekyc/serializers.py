@@ -13,9 +13,10 @@ class KYCFormSerializer(serializers.ModelSerializer):
     gender = serializers.CharField()
     adhaar_image = serializers.ImageField()
     hospital_id = serializers.CharField()
+    adhaar_number = serializers.CharField()
     class Meta:
         model = KYCInformation
-        fields = ['first_name','last_name','hospital_id','profile_image','dob','gender','adhaar_image']
+        fields = ['first_name','adhaar_number','last_name','hospital_id','profile_image','dob','gender','adhaar_image']
 
     def save(self,request):
         ekyc = KYCInformation.objects.create(
@@ -27,6 +28,7 @@ class KYCFormSerializer(serializers.ModelSerializer):
             dob = self.validated_data['dob'],
             gender = self.validated_data['gender'],
             hospital_vacc = VaccinationOrg.objects.get(pk=int(self.validated_data['hospital_id'])),
-            adhaar_image = self.validated_data.get('adhaar_image',None)   
+            adhaar_image = self.validated_data.get('adhaar_image',None),   
+            adhaar_number = self.validated_data['adhaar_number']
         )
         return ekyc

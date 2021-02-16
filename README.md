@@ -1,5 +1,5 @@
 <p align="center">
-  <img  src="https://github.com/sahil9001/VaxU_Codebreak_2.0/blob/main/VaxU.png" height="600" width="600">
+  <img  src="https://github.com/sahil9001/VaxU_Base/blob/master/assets/VaxU.png" height="600" width="600">
 </p>
 
 
@@ -55,4 +55,4 @@ Our solution will help the health authorities for quick, secure and efficient va
 * Sahil Silare
 * Siddharth Mishra
 * Amitesh Agrawal
-
+* Prakhar Asaiya
