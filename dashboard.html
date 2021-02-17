@@ -300,265 +300,281 @@
     </footer>
     <script src="styles/jquery-3.5.1.js"></script>
     <script>
-      <<<<<<< HEAD
-              function toasterOptions() {
-                  toastr.options = {
-                      "closeButton": false,
-                      "debug": false,
-                      "newestOnTop": false,
-                      "progressBar": false,
-                      "positionClass": "toast-top-center",
-                      "preventDuplicates": true,
-                      "onclick": null,
-                      "showDuration": "100",
-                      "hideDuration": "1000",
-                      "timeOut": "2000",
-                      "extendedTimeOut": "1000",
-                      "showEasing": "swing",
-                      "hideEasing": "linear",
-                      "showMethod": "show",
-                      "hideMethod": "hide"
-                  };
-              };
-              toasterOptions();
+      function toasterOptions() {
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: false,
+          progressBar: false,
+          positionClass: "toast-top-center",
+          preventDuplicates: true,
+          onclick: null,
+          showDuration: "100",
+          hideDuration: "1000",
+          timeOut: "2000",
+          extendedTimeOut: "1000",
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "show",
+          hideMethod: "hide",
+        };
+      }
+      toasterOptions();
 
-              document.addEventListener('DOMContentLoaded', () => {
-                // 1. Display file name when select file
-                let fileInputs = document.querySelectorAll('.file.has-name');
-                for (let fileInput of fileInputs) {
-                  let input = fileInput.querySelector('.file-input');
-                  let name = fileInput.querySelector('.file-name');
-                  input.addEventListener('change', () => {
-                    let files = input.files;
-                    if (files.length === 0) {
-                      name.innerText = 'No file selected';
-                    } else {
-                      name.innerText = files[0].name;
-                    }
-                  });
-                }
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Display file name when select file
+        let fileInputs = document.querySelectorAll(".file.has-name");
+        for (let fileInput of fileInputs) {
+          let input = fileInput.querySelector(".file-input");
+          let name = fileInput.querySelector(".file-name");
+          input.addEventListener("change", () => {
+            let files = input.files;
+            if (files.length === 0) {
+              name.innerText = "No file selected";
+            } else {
+              name.innerText = files[0].name;
+            }
+          });
+        }
 
-                // 2. Remove file name when form reset
-                let forms = document.getElementsByTagName('form');
-                for (let form of forms) {
-                  form.addEventListener('reset', () => {
-                    console.log('a');
-                    let names = form.querySelectorAll('.file-name');
-                    for (let name of names) {
-                      name.innerText = 'No file selected';
-                    }
-                  });
-                }
-              });
+        // 2. Remove file name when form reset
+        let forms = document.getElementsByTagName("form");
+        for (let form of forms) {
+          form.addEventListener("reset", () => {
+            console.log("a");
+            let names = form.querySelectorAll(".file-name");
+            for (let name of names) {
+              name.innerText = "No file selected";
+            }
+          });
+        }
+      });
 
-                  var userList;
-                  var host = "sahil9001.github.io/VaxU_Base";
-                  console.log(typeof(document.cookie));
-                  var name = getCookie('username');
-                  console.log(name);
-                  document.getElementById("user_name").innerHTML = name;
-                  function getCookie(cname) {
-                    var name = cname + "=";
-                    var decodedCookie = decodeURIComponent(document.cookie);
-                    var ca = decodedCookie.split(';');
-                    for(var i = 0; i <ca.length; i++) {
-                      var c = ca[i];
-                      while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                      }
-                      if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                      }
-                    }
-                    return "";
-                  }
-                  const webcamElement = document.getElementById('webcam');
-                  const canvasElement = document.getElementById('canvas');
-                  const snapSoundElement = document.getElementById('snapSound');
-                  const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
-                  function startWebcam() {
-                      webcam.start()
-                     .then(result =>{
-                        console.log("webcam started");
-                     })
-                     .catch(err => {
-                         console.log(err);
-                     });
-                  }
-                  function takeSnap(){
-                      let picture = webcam.snap();
-                      document.querySelector('#download-photo').href = picture;
-                  }
-                  function flipCamera(){
-                      $('#cameraFlip').click(function() {
-                      webcam.flip();
-                      webcam.start();
-                  });
-                  }
+      var userList;
+      var host = "sahil9001.github.io/VaxU_Base";
+      console.log(typeof document.cookie);
+      var name = getCookie("username");
+      console.log(name);
+      document.getElementById("user_name").innerHTML = name;
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+      const webcamElement = document.getElementById("webcam");
+      const canvasElement = document.getElementById("canvas");
+      const snapSoundElement = document.getElementById("snapSound");
+      const webcam = new Webcam(
+        webcamElement,
+        "user",
+        canvasElement,
+        snapSoundElement
+      );
+      function startWebcam() {
+        webcam
+          .start()
+          .then((result) => {
+            console.log("webcam started");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      function takeSnap() {
+        let picture = webcam.snap();
+        document.querySelector("#download-photo").href = picture;
+      }
+      function flipCamera() {
+        $("#cameraFlip").click(function () {
+          webcam.flip();
+          webcam.start();
+        });
+      }
 
-                  function stopWebcam(){
-                      webcam.stop();
-                  }
-                  function isCanvasBlank(canvas) {
-                    return !canvas.getContext('2d')
-                      .getImageData(0, 0, canvas.width, canvas.height).data
-                      .some(channel => channel !== 0);
-                  }
-                  console.log(isCanvasBlank(canvasElement));
-                  /*
+      function stopWebcam() {
+        webcam.stop();
+      }
+      function isCanvasBlank(canvas) {
+        return !canvas
+          .getContext("2d")
+          .getImageData(0, 0, canvas.width, canvas.height)
+          .data.some((channel) => channel !== 0);
+      }
+      console.log(isCanvasBlank(canvasElement));
+      /*
                   function download() {
                   var dt = canvas.toDataURL('image/png');
                   this.href = dt;
               };
                   downloadLnk.addEventListener('click', download, false);*/
 
-                  $(document).ready(function () {
-                      function getvalues(){
-                      var urlToHit = "https://cors-anywhere.herokuapp.com/http://20.198.3.123/api/core/";
-                      var request = new XMLHttpRequest();
-                      var token = localStorage.getItem(name);
-                      request.open("GET", urlToHit, true);
-                      request.setRequestHeader("Content-type", "application/json");
-                      request.setRequestHeader("Authorization", token);
-                      request.onreadystatechange = function() {
-                          if(request.readyState == 4 && request.status == 200){
+      $(document).ready(function () {
+        function getvalues() {
+          var urlToHit =
+            "https://cors-anywhere.herokuapp.com/http://20.198.3.123/api/core/";
+          var request = new XMLHttpRequest();
+          var token = localStorage.getItem(name);
+          request.open("GET", urlToHit, true);
+          request.setRequestHeader("Content-type", "application/json");
+          request.setRequestHeader("Authorization", token);
+          request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+              var response = request.responseText;
+              console.log(typeof response);
+              var obj = JSON.parse(response);
+              console.log(typeof obj);
+              console.log(obj.vaccines_available);
+              console.log(obj.price);
+              console.log(obj.is_available);
+              document.getElementById("vaccinesLeft").innerHTML =
+                obj.vaccines_available;
+              document.getElementById("priceOfVaccine").innerHTML = obj.price;
+              document.getElementById("availabilityStatus").innerHTML =
+                obj.is_available;
+            }
+          };
+          request.send();
+        }
+        getvalues();
 
-                              var response = request.responseText;
-                              console.log(typeof(response));
-                              var obj = JSON.parse(response);
-                              console.log(typeof(obj));
-                              console.log(obj.vaccines_available);
-                              console.log(obj.price);
-                              console.log(obj.is_available);
-                              document.getElementById('vaccinesLeft').innerHTML = obj.vaccines_available;
-                              document.getElementById('priceOfVaccine').innerHTML = obj.price;
-                              document.getElementById('availabilityStatus').innerHTML = obj.is_available;
-                      }
-                  }
-                      request.send();
-                  }
-                  getvalues();
+        function loadUsers() {
+          var urlToHit =
+            "https://cors-anywhere.herokuapp.com/http://20.198.3.123/api/core/list/";
+          var request = new XMLHttpRequest();
+          var token = localStorage.getItem(name);
+          request.open("GET", urlToHit, true);
+          request.setRequestHeader("Content-type", "application/json");
+          request.setRequestHeader("Authorization", token);
+          request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+              //console.log(typeof(request));
+              var response = request.responseText;
+              var i,
+                x = "";
+              userList = JSON.parse(response);
+              for (i = 0; i < userList.length; i++) {
+                x +=
+                  "<tr><td>" +
+                  userList[i].patient_id +
+                  "</td><td>" +
+                  userList[i].patient +
+                  "</td><td>" +
+                  userList[i].timeslot +
+                  "</td></tr>";
+              }
+              document.getElementById("getList").innerHTML = x;
+            }
+          };
+          request.send();
+        }
 
-                      function loadUsers(){
-                      var urlToHit = "https://cors-anywhere.herokuapp.com/http://20.198.3.123/api/core/list/";
-                      var request = new XMLHttpRequest();
-                      var token = localStorage.getItem(name);
-                      request.open("GET", urlToHit, true);
-                      request.setRequestHeader("Content-type", "application/json");
-                      request.setRequestHeader("Authorization", token);
-                      request.onreadystatechange = function() {
-                          if(request.readyState == 4 && request.status == 200){
-                              //console.log(typeof(request));
-                              var response = request.responseText;
-                              var i, x="";
-                              userList = JSON.parse(response);
-                              for(i = 0; i < userList.length; i++){
-                                  x += "<tr><td>" + userList[i].patient_id + "</td><td>" + userList[i].patient + "</td><td>" + userList[i].timeslot + "</td></tr>";
-                              }
-                              document.getElementById('getList').innerHTML = x;
-                      }
-                  }
-                  request.send();
-                  }
+        loadUsers();
+      });
 
-                      loadUsers();
+      // function submitDetails(){
 
-                  });
+      var urlToHit =
+        "https://cors-anywhere.herokuapp.com/http://20.198.3.123:80/api/core/check/";
 
-             // function submitDetails(){
+      const handleImageUpload = (event) => {
+        const files = event.target.files;
+        const formData = new FormData();
+        var id = userList[0].patient_id;
+        var token = localStorage.getItem(name);
+        formData.append("clicked_photo", files[0]);
+        formData.append("patient_id", id);
+        console.log(files[0]);
+        console.log(id);
+        fetch(urlToHit, {
+          method: "POST",
+          headers: {
+            Authorization: token,
+          },
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            toastr.info(json);
+          })
+          .catch((error) => {
+            toastr.error(error);
+          });
+      };
 
-                var urlToHit = "https://cors-anywhere.herokuapp.com/http://20.198.3.123:80/api/core/check/";
-
-                const handleImageUpload = event => {
-                        const files = event.target.files;
-                        const formData = new FormData();
-                        var id = userList[0].patient_id;
-                        var token = localStorage.getItem(name);
-                        formData.append('clicked_photo', files[0]);
-                        formData.append('patient_id', id);
-                        console.log(files[0]);
-                        console.log(id);
-                        fetch(urlToHit, {
-                          method: 'POST',
-                          headers: {
-                              'Authorization': token
-                          },
-                          body: formData
-                        })
-                        .then(response => response.json())
-                        .then(json => {
-                          toastr.info(json)
-                        })
-                        .catch(error => {
-                          toastr.error(error)
-                        });
-                }
-
-              /*document.querySelector('#fileUpload').addEventListener('click', event => {
+      /*document.querySelector('#fileUpload').addEventListener('click', event => {
                 handleImageUpload(event)
               });*/
 
-              console.log('submit started');
+      console.log("submit started");
 
-              function submitDetails() {
-                  if(document.getElementById("fileUpload").value == "" ){
-                      toastr.info("Please select an image first!");
-                        console.log('no files selected');
-                    }
-                  else{
-                      const files = document.querySelector('[type=file]').files;
-                      var file = files[0];
-                      const formData = new FormData();
-                      if(userList.length > 0){
-                        var id = userList[0].patient_id;
-                        var token = localStorage.getItem(name);
-                        formData.append('clicked_photo', file);
-                        formData.append('patient_id', id);
-                        console.log(file);
-                        console.log(id);
-                        fetch(urlToHit, {
-                          method: 'POST',
-                          headers: {
-                              'Authorization': token
-                          },
-                          body: formData
-                        })
-                        .then(response => response.json())
-                        .then(json => {
-                          toastr.info(json)
-                        })
-                        .catch(error => {
-                          toastr.error(error)
-                        });
-                      }
-                      else{
-                          toastr.error("User List is empty");
-                      }
-                  }
-              }
+      function submitDetails() {
+        if (document.getElementById("fileUpload").value == "") {
+          toastr.info("Please select an image first!");
+          console.log("no files selected");
+        } else {
+          const files = document.querySelector("[type=file]").files;
+          var file = files[0];
+          const formData = new FormData();
+          if (userList.length > 0) {
+            var id = userList[0].patient_id;
+            var token = localStorage.getItem(name);
+            formData.append("clicked_photo", file);
+            formData.append("patient_id", id);
+            console.log(file);
+            console.log(id);
+            fetch(urlToHit, {
+              method: "POST",
+              headers: {
+                Authorization: token,
+              },
+              body: formData,
+            })
+              .then((response) => response.json())
+              .then((json) => {
+                toastr.info(json);
+              })
+              .catch((error) => {
+                toastr.error(error);
+              });
+          } else {
+            toastr.error("User List is empty");
+          }
+        }
+      }
 
-              function isVaccinated(){
-                  var host = "https://cors-anywhere.herokuapp.com/http://20.198.3.123/api/core/vaccinated/";
-                  var id = $('textarea').val();
-                  console.log(userList);
-                      console.log({id});
-                      host = host + id + "/";
-                      var token = localStorage.getItem(name);
-                      console.log(host);
-                      fetch(host, {
-                          method: 'GET',
-                          headers: {
-                              'Authorization' : token
-                          }
-                      })
-                      .then(res => res.json())
-                      .then(data =>{
-                          toastr.success("Successfully Vaccinated !")
-                      })
-                      .catch(error => {
-                          toastr.error("User does not exists or already vaccinated!")
-                      });
-                    /*  $.ajax({
+      function isVaccinated() {
+        var host =
+          "https://cors-anywhere.herokuapp.com/http://20.198.3.123/api/core/vaccinated/";
+        var id = $("textarea").val();
+        console.log(userList);
+        console.log({ id });
+        host = host + id + "/";
+        var token = localStorage.getItem(name);
+        console.log(host);
+        fetch(host, {
+          method: "GET",
+          headers: {
+            Authorization: token,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            toastr.success("Successfully Vaccinated !");
+          })
+          .catch((error) => {
+            toastr.error("User does not exists or already vaccinated!");
+          });
+        /*  $.ajax({
                           type: "GET",
                           url: host,
                           headers: {
@@ -572,10 +588,10 @@
                               console.log(error);
                           }
                       });*/
-                      loadUsers();
-              }
+        loadUsers();
+      }
 
-                /*  var dataURL = canvasElement.toDataURL();
+      /*  var dataURL = canvasElement.toDataURL();
                   console.log(dataURL);
                   const fd = new FormData();
                   var blobBin = atob(dataURL.split(',')[1]);
@@ -599,7 +615,7 @@
                     alert(respond);
                   });*/
 
-                  /*fd.append('clicked_photo', dataURL);
+      /*fd.append('clicked_photo', dataURL);
                   var id = userList[0].patient_id;
                   console.log(id);
                   console.log(userList);
@@ -636,12 +652,12 @@
       //                    console.log('trying toastr');
       //                    toastr.error('Please click an image first!');
       //                }
-                  //}
-                  function logout(){
-                      console.log(name);
-                      localStorage.removeItem(name);
-                      window.location = "http://" + host + "/";
-                  }
+      //}
+      function logout() {
+        console.log(name);
+        localStorage.removeItem(name);
+        window.location = "http://" + host + "/";
+      }
     </script>
     <!--    <script language="JavaScript" type="text/javascript" src="styles/app.js"></script>-->
   </body>
