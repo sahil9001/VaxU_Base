@@ -424,6 +424,7 @@
             "https://cors-anywhere.herokuapp.com/http://20.198.3.123/api/core/";
           var request = new XMLHttpRequest();
           var token = localStorage.getItem(name);
+          console.log(token);
           request.open("GET", urlToHit, true);
           request.setRequestHeader("Content-type", "application/json");
           request.setRequestHeader("Authorization", token);
