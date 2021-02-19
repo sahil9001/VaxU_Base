@@ -4,7 +4,7 @@ import 'package:vaxuapp/models/api_response.dart';
 import 'package:vaxuapp/services/api.dart';
 import 'package:vaxuapp/screens/signup/signup.dart';
 import 'package:vaxuapp/screens/menu/menu.dart';
-import 'package:vaxuapp/src/Widget/beizerContainer.dart';
+import 'package:vaxuapp/Widget/beizerContainer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {

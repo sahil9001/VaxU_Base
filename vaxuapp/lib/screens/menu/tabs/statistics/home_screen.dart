@@ -1,5 +1,5 @@
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/Widget/infoCard.dart';
+import 'package:vaxuapp/Widget/infoCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';

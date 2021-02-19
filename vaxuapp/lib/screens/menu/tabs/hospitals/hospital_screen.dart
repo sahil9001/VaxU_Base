@@ -1,6 +1,5 @@
 import 'package:vaxuapp/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/screens/menu/menu.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -84,7 +83,6 @@ class _HospitalScreenState extends State<HospitalScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      appBar: buildDetailsAppBar(context),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: FutureBuilder<VaccinatorsList>(
@@ -95,9 +93,9 @@ class _HospitalScreenState extends State<HospitalScreen> {
                   child: Column(children: buildList(snapshot)),
                 );
               } else if (snapshot.hasError) {
-                return Text("error");
+                return Text("ERROR");
               }
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }),
       ),
     );
@@ -241,24 +239,6 @@ class _HospitalScreenState extends State<HospitalScreen> {
           style: Theme.of(context).textTheme.headline5.copyWith(color: kPrimaryColor, height: 1.2),
         ),
       ],
-    );
-  }
-
-  AppBar buildDetailsAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: kBackgroundColor,
-      elevation: 0,
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back_ios,
-          color: kPrimaryColor,
-        ),
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (BuildContext context) => MenuScreen()));
-        },
-      ),
-      actions: <Widget>[],
     );
   }
 }

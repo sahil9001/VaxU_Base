@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/Widget/beizerContainer.dart';
+import 'package:vaxuapp/Widget/beizerContainer.dart';
 import 'package:vaxuapp/screens/login/login.dart';
 import 'package:vaxuapp/models/api_error.dart';
 import 'package:vaxuapp/models/api_response.dart';
