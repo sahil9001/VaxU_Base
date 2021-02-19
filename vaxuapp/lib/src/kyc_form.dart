@@ -1,47 +1,35 @@
-// TODO Implement this library.
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:async/async.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/models/api_error.dart';
-import 'package:vaxuapp/src/models/api_response.dart';
-import 'package:vaxuapp/src/models/user.dart';
+import 'package:vaxuapp/models/api_error.dart';
+import 'package:vaxuapp/models/api_response.dart';
 import 'package:vaxuapp/src/profile_page.dart';
-import 'package:vaxuapp/src/successapplication.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
-import 'package:path/path.dart';
-import 'package:dio/dio.dart';
-import 'package:http_parser/http_parser.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HospitalList {
   String name;
   String hospital_id;
-  HospitalList({
-    this.name,
-    this.hospital_id
-  });
+  HospitalList({this.name, this.hospital_id});
 }
+
 class AppliedResponse {
   final bool applied_for_vaccination;
   AppliedResponse({this.applied_for_vaccination});
   factory AppliedResponse.fromJson(Map<String, dynamic> json) {
-    return new AppliedResponse(
-        applied_for_vaccination: json['applied_for_vaccination']);
+    return new AppliedResponse(applied_for_vaccination: json['applied_for_vaccination']);
   }
 }
 
 Future<AppliedResponse> fetchStatus() async {
-  String token = await User().getToken();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = prefs.getString("token");
   final response = await http.post(
-    'http://${URL_HOST}/api/users/vaccinators/',
+    'http://$URL_HOST/api/users/vaccinators/',
     headers: {'accept': 'application/json', "Authorization": "$token"},
   );
   if (response.statusCode == 200) {
@@ -55,24 +43,16 @@ Future<AppliedResponse> fetchStatus() async {
   }
 }
 
-Future<StreamedResponse> postEKYC(
-    String firstname,
-    String lastname,
-    String gender,
-    String date,
-    File adhaar_image,
-    File image,
-    String adhaar_number,
-    String hospital_id) async {
-  String token = await User().getToken();
-  String uploadURL = "http://${URL_HOST}/api/ekyc/register/";
+Future<StreamedResponse> postEKYC(String firstname, String lastname, String gender, String date,
+    File adhaar_image, File image, String adhaar_number, String hospital_id) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = prefs.getString("token");
+  String uploadURL = "http://$URL_HOST/api/ekyc/register/";
   String filename = adhaar_image.path;
   String filename1 = image.path;
   var request = http.MultipartRequest('POST', Uri.parse(uploadURL));
-  request.files
-      .add(await http.MultipartFile.fromPath('adhaar_image', filename));
-  request.files
-      .add(await http.MultipartFile.fromPath('profile_image', filename1));
+  request.files.add(await http.MultipartFile.fromPath('adhaar_image', filename));
+  request.files.add(await http.MultipartFile.fromPath('profile_image', filename1));
   request.headers["Authorization"] = token;
   request.fields["first_name"] = firstname;
   request.fields["last_name"] = lastname;
@@ -95,53 +75,23 @@ class _KycScreenState extends State<KycScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   var _genderItems = ['M', 'F'];
   List<HospitalList> _hospitalItems = [
-    HospitalList(
-      hospital_id: "2",
-      name: "Balaji Hospital"
-    ),
-    HospitalList(
-      hospital_id: "3",
-      name: "Sarvodaya Hospital"
-    ),
-    HospitalList(
-      hospital_id: "4",
-      name: "Ambedkar Government Hospital"
-    ),
-    HospitalList(
-      hospital_id: "5",
-      name: "Krishna Hospital"
-    ),
-    HospitalList(
-      hospital_id: "6",
-      name: "Aryan Hospital"
-    ),
-    HospitalList(
-      hospital_id: "7",
-      name: "Sanjeeb Hospital"
-    ),
-    HospitalList(
-      hospital_id: "8",
-      name: "Sakshi Hospital"
-    ),
-    HospitalList(
-      hospital_id: "9",
-      name: "Kalyan Hospital"
-    ),
-    HospitalList(
-      hospital_id: "10",
-      name: "Suyash Hospital"
-    ),
-    HospitalList(
-      hospital_id: "11",
-      name: "Narayana Hospital"
-    ),
-  
+    HospitalList(hospital_id: "1", name: "Balaji Hospital"),
+    HospitalList(hospital_id: "2", name: "Sahil Hospital"),
+    HospitalList(hospital_id: "3", name: "Sarvodaya Hospital"),
+    HospitalList(hospital_id: "4", name: "Ambedkar Government Hospital"),
+    HospitalList(hospital_id: "5", name: "Krishna Hospital"),
+    HospitalList(hospital_id: "6", name: "Aryan Hospital"),
+    HospitalList(hospital_id: "7", name: "Sanjeeb Hospital"),
+    HospitalList(hospital_id: "8", name: "Sakshi Hospital"),
+    HospitalList(hospital_id: "9", name: "Kalyan Hospital"),
+    HospitalList(hospital_id: "10", name: "Suyash Hospital"),
+    HospitalList(hospital_id: "11", name: "Narayana Hospital"),
   ];
   ApiResponse _apiResponse = new ApiResponse();
   String _firstname = "";
   String _lastname = "";
   String _gender = 'M';
-  String _hospital_id = ""; 
+  String _hospital_id = "";
   File _adhaar_image;
   File _image;
   Uri _adhaar_image_picked;
@@ -188,10 +138,11 @@ class _KycScreenState extends State<KycScreen> {
       }
     });
   }
- @override
- void initState() {
+
+  @override
+  void initState() {
     super.initState();
-   _hospital_id = _hospitalItems[0].hospital_id;
+    _hospital_id = _hospitalItems[0].hospital_id;
   }
 
   @override
@@ -220,8 +171,7 @@ class _KycScreenState extends State<KycScreen> {
                     children: <Widget>[
                       Text(
                         "First Name (Should be official)",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
                         height: 10,
@@ -238,9 +188,7 @@ class _KycScreenState extends State<KycScreen> {
                             return null;
                           },
                           decoration: InputDecoration(
-                              border: InputBorder.none,
-                              fillColor: Color(0xfff3f3f4),
-                              filled: true))
+                              border: InputBorder.none, fillColor: Color(0xfff3f3f4), filled: true))
                     ],
                   ),
                 ),
@@ -251,8 +199,7 @@ class _KycScreenState extends State<KycScreen> {
                     children: <Widget>[
                       Text(
                         "Last Name (Should be official)",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
                         height: 10,
@@ -269,9 +216,7 @@ class _KycScreenState extends State<KycScreen> {
                             return null;
                           },
                           decoration: InputDecoration(
-                              border: InputBorder.none,
-                              fillColor: Color(0xfff3f3f4),
-                              filled: true))
+                              border: InputBorder.none, fillColor: Color(0xfff3f3f4), filled: true))
                     ],
                   ),
                 ),
@@ -282,8 +227,7 @@ class _KycScreenState extends State<KycScreen> {
                     children: <Widget>[
                       Text(
                         "Adhaar number without spaces",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
                         height: 10,
@@ -300,9 +244,7 @@ class _KycScreenState extends State<KycScreen> {
                             return null;
                           },
                           decoration: InputDecoration(
-                              border: InputBorder.none,
-                              fillColor: Color(0xfff3f3f4),
-                              filled: true))
+                              border: InputBorder.none, fillColor: Color(0xfff3f3f4), filled: true))
                     ],
                   ),
                 ),
@@ -313,8 +255,7 @@ class _KycScreenState extends State<KycScreen> {
                     children: <Widget>[
                       Text(
                         "Date of Birth (YYYY-MM-DD)",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
                         height: 10,
@@ -331,9 +272,7 @@ class _KycScreenState extends State<KycScreen> {
                             return null;
                           },
                           decoration: InputDecoration(
-                              border: InputBorder.none,
-                              fillColor: Color(0xfff3f3f4),
-                              filled: true))
+                              border: InputBorder.none, fillColor: Color(0xfff3f3f4), filled: true))
                     ],
                   ),
                 ),
@@ -344,8 +283,7 @@ class _KycScreenState extends State<KycScreen> {
                     children: <Widget>[
                       Text(
                         "Gender",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
                         height: 10,
@@ -354,13 +292,11 @@ class _KycScreenState extends State<KycScreen> {
                         builder: (FormFieldState<String> state) {
                           return InputDecorator(
                             decoration: InputDecoration(
-                                labelStyle: TextStyle(
-                                    color: Colors.redAccent, fontSize: 16.0),
-                                errorStyle: TextStyle(
-                                    color: Colors.redAccent, fontSize: 16.0),
+                                labelStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                                errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
                                 hintText: 'Gender',
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
+                                border:
+                                    OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
                             isEmpty: _gender == '',
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
@@ -393,8 +329,7 @@ class _KycScreenState extends State<KycScreen> {
                     children: <Widget>[
                       Text(
                         "Hospital",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
                         height: 10,
@@ -403,13 +338,11 @@ class _KycScreenState extends State<KycScreen> {
                         builder: (FormFieldState<String> state) {
                           return InputDecorator(
                             decoration: InputDecoration(
-                                labelStyle: TextStyle(
-                                    color: Colors.redAccent, fontSize: 16.0),
-                                errorStyle: TextStyle(
-                                    color: Colors.redAccent, fontSize: 16.0),
+                                labelStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+                                errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
                                 hintText: 'Hospital',
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
+                                border:
+                                    OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
                                 value: _hospital_id,
@@ -456,19 +389,24 @@ class _KycScreenState extends State<KycScreen> {
           Container(
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: FloatingActionButton(
-                  child: Icon(Icons.credit_card), onPressed: getImage1)),
+                child: Icon(Icons.credit_card),
+                onPressed: getImage1,
+                heroTag: "btn1",
+              )),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: FloatingActionButton(
-                  child: Icon(Icons.camera), onPressed: getImage)),
+                child: Icon(Icons.camera),
+                onPressed: getImage,
+                heroTag: "btn2",
+              )),
         ],
       ),
     );
   }
 
   void showInSnackBar(String value) {
-    _scaffoldKey.currentState
-        .showSnackBar(new SnackBar(content: new Text(value)));
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text(value)));
   }
 
   void _handleSubmit() async {
@@ -477,12 +415,13 @@ class _KycScreenState extends State<KycScreen> {
       showInSnackBar('Please fix the errors in red before submitting.');
     } else {
       form.save();
-      var res = await postEKYC(_firstname, _lastname, _gender, _date,
-          _adhaar_image, _image, _adhaar_number,_hospital_id);
+      var res = await postEKYC(_firstname, _lastname, _gender, _date, _adhaar_image, _image,
+          _adhaar_number, _hospital_id);
       if ((_apiResponse.ApiError as ApiError) == null) {
         if (res.statusCode == 201)
           showInSnackBar('Success');
-        else if (res.statusCode == 400) showInSnackBar('Resubmit the adhaar card and proper details');
+        else if (res.statusCode == 400)
+          showInSnackBar('Resubmit the adhaar card and proper details');
       } else {
         showInSnackBar((_apiResponse.ApiError as ApiError).error);
       }
@@ -499,8 +438,8 @@ class _KycScreenState extends State<KycScreen> {
           color: kPrimaryColor,
         ),
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => ProfileScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()));
         },
       ),
       actions: <Widget>[],

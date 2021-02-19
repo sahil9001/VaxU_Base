@@ -1,9 +1,8 @@
 import 'dart:convert';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:vaxuapp/constants.dart';
 import 'package:vaxuapp/src/kyc_form.dart';
-import 'package:vaxuapp/src/models/user.dart';
 import 'package:vaxuapp/src/profile_page.dart';
 import 'package:vaxuapp/src/successapplication.dart';
 import 'package:http/http.dart' as http;
@@ -14,15 +13,14 @@ class ApplyResponse {
     this.applied_for_vaccination,
   });
   factory ApplyResponse.fromJson(Map<String, dynamic> json) {
-    return new ApplyResponse(
-        applied_for_vaccination: json['applied_for_vaccination']);
+    return new ApplyResponse(applied_for_vaccination: json['applied_for_vaccination']);
   }
 }
 
 Future<ApplyResponse> fetchResponse() async {
-  String token = await User().getToken();
-  final response = await http.get(
-      'http://${URL_HOST}/api/users/apply/check/',
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = prefs.getString("token");
+  final response = await http.get('http://$URL_HOST/api/users/apply/check/',
       headers: {'accept': 'application/json', "Authorization": "$token"});
   if (response.statusCode == 200) {
     return ApplyResponse.fromJson(jsonDecode(response.body));
@@ -55,7 +53,7 @@ class _VaccinationApplyState extends State<VaccinationApply> {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data.applied_for_vaccination == true) {
-                    return SuccessApplication();
+                  return SuccessApplication();
                 } else {
                   return KycScreen();
                 }
@@ -78,8 +76,8 @@ class _VaccinationApplyState extends State<VaccinationApply> {
           color: kPrimaryColor,
         ),
         onPressed: () {
-          Navigator.of(context).pop(MaterialPageRoute(
-              builder: (BuildContext context) => ProfileScreen()));
+          Navigator.of(context)
+              .pop(MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()));
         },
       ),
       actions: <Widget>[],

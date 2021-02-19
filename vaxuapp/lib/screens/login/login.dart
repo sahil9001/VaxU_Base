@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/models/api_error.dart';
-import 'package:vaxuapp/src/models/api_response.dart';
-import 'package:vaxuapp/src/models/user.dart';
-import 'package:vaxuapp/src/services/api.dart';
-import 'package:vaxuapp/src/signup.dart';
+import 'package:vaxuapp/models/api_error.dart';
+import 'package:vaxuapp/models/api_response.dart';
+import 'package:vaxuapp/services/api.dart';
+import 'package:vaxuapp/screens/signup/signup.dart';
+import 'package:vaxuapp/screens/menu/menu.dart';
 import 'package:vaxuapp/src/Widget/beizerContainer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -148,10 +148,8 @@ class _LoginPageState extends State<LoginPage> {
 
   void _saveAndRedirectToHome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString("token", (_apiResponse.Data as User).token);
-    print(prefs.getString('token'));
-    Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/home'),
-        arguments: (_apiResponse.Data as User));
+    await prefs.setString("token", _apiResponse.Data);
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MenuScreen()));
   }
 
   @override

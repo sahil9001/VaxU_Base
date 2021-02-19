@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/details_screen.dart';
 import 'package:vaxuapp/src/help_screen.dart';
-import 'package:vaxuapp/src/home_final_screen.dart';
-import 'package:vaxuapp/src/home_screen.dart';
 import 'package:vaxuapp/src/apply_for_vaccination.dart';
 import 'package:vaxuapp/src/profile_details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,10 +16,8 @@ class _BodyState extends State<Body> {
   void _handleLogout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('token');
-    Navigator.pushNamedAndRemoveUntil(
-        context, '/login', ModalRoute.withName('/login'));
+    Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/login'));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,23 +35,21 @@ class _BodyState extends State<Body> {
               icon: Icon(Icons.supervised_user_circle),
               press: () => {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            ProfileDetailsScreen()))
+                        builder: (BuildContext context) => ProfileDetailsScreen()))
                   }),
           ProfileMenu(
               text: "Apply for Vaccination",
               icon: Icon(Icons.local_hospital),
               press: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => VaccinationApply()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) => VaccinationApply()));
               }),
           ProfileMenu(
               text: "Help Center",
               icon: Icon(Icons.help_center),
               press: () => {
-                    
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => HelpScreen()))
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (BuildContext context) => HelpScreen()))
                   }),
           ProfileMenu(
             text: "Log Out",

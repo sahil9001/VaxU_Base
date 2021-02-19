@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vaxuapp/src/Widget/beizerContainer.dart';
-import 'package:vaxuapp/src/loginPage.dart';
-import 'package:vaxuapp/src/models/api_error.dart';
-import 'package:vaxuapp/src/models/api_response.dart';
-import 'package:vaxuapp/src/services/api.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:vaxuapp/screens/login/login.dart';
+import 'package:vaxuapp/models/api_error.dart';
+import 'package:vaxuapp/models/api_response.dart';
+import 'package:vaxuapp/services/api.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -40,16 +39,14 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
-            Text('Back',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
+            Text('Back', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
           ],
         ),
       ),
     );
   }
 
-  Widget _entryField(String title, String valuetoset,
-      {bool isPassword = false}) {
+  Widget _entryField(String title, String valuetoset, {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -69,9 +66,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 valuetoset = value;
               },
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
+                  border: InputBorder.none, fillColor: Color(0xfff3f3f4), filled: true))
         ],
       ),
     );
@@ -88,10 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Colors.grey.shade200,
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2)
+                  color: Colors.grey.shade200, offset: Offset(2, 4), blurRadius: 5, spreadRadius: 2)
             ],
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
@@ -108,8 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _loginAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
@@ -127,10 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             Text(
               'Login',
-              style: TextStyle(
-                  color: Color(0xFF0D8E53),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+              style: TextStyle(color: Color(0xFF0D8E53), fontSize: 13, fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -156,8 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void showInSnackBar(String value) {
     print(value);
-    _scaffoldKey.currentState
-        .showSnackBar(new SnackBar(content: new Text(value)));
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text(value)));
   }
 
   @override
@@ -195,8 +182,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: <Widget>[
                             Text(
                               "Username",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -226,8 +212,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: <Widget>[
                             Text(
                               "Phone",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 5,
@@ -257,8 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: <Widget>[
                             Text(
                               "Email",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 5,
@@ -288,8 +272,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: <Widget>[
                             Text(
                               "Password",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 5,
@@ -320,8 +303,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: <Widget>[
                             Text(
                               "Blood Group",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 5,
@@ -351,8 +333,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: <Widget>[
                             Text(
                               "City",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 5,
@@ -382,8 +363,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: <Widget>[
                             Text(
                               "Age",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 5,
@@ -414,8 +394,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           children: <Widget>[
                             Text(
                               "Country",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 5,
@@ -462,8 +441,8 @@ class _SignUpPageState extends State<SignUpPage> {
       showInSnackBar('Please fix the errors in red before submitting.');
     } else {
       form.save();
-      _apiResponse = await registerUser(_username, _password, _phone, _email,
-          _blood_group, _age, _city, _country);
+      _apiResponse = await registerUser(
+          _username, _password, _phone, _email, _blood_group, _age, _city, _country);
       if ((_apiResponse.ApiError as ApiError) == null) {
         _saveAndRedirectToLogin();
       } else {
@@ -474,7 +453,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _saveAndRedirectToLogin() {
     print(_phone);
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
   }
 }

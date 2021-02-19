@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/profile_page.dart';
 
 class SuccessApplication extends StatefulWidget {
   @override
@@ -17,8 +16,14 @@ class _SuccessApplicationState extends State<SuccessApplication> {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.check_circle,size: 70,color: Colors.green,),
-            SizedBox(height: 20,),
+            Icon(
+              Icons.check_circle,
+              size: 70,
+              color: Colors.green,
+            ),
+            SizedBox(
+              height: 20,
+            ),
             Text(
               "You've already applied for vaccination!",
               style: TextStyle(color: Colors.green, fontSize: 40),

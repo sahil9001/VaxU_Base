@@ -5,20 +5,13 @@ import 'package:vaxuapp/src/details_screen.dart';
 import 'package:vaxuapp/src/home_screen.dart';
 import 'package:vaxuapp/src/hospital_screen.dart';
 import 'package:vaxuapp/src/profile_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-void _getUser() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool CheckValue = prefs.containsKey('userId');
-  print(CheckValue);
-}
-
-class HomeFinalScreen extends StatefulWidget {
+class MenuScreen extends StatefulWidget {
   @override
-  _HomeFinalScreenState createState() => _HomeFinalScreenState();
+  _MenuScreenState createState() => _MenuScreenState();
 }
 
-class _HomeFinalScreenState extends State<HomeFinalScreen> {
+class _MenuScreenState extends State<MenuScreen> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {

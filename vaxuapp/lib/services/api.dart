@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:vaxuapp/models/user.dart';
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/models/api_error.dart';
-import 'package:vaxuapp/src/models/api_response.dart';
-import 'package:vaxuapp/src/models/user.dart';
+import 'package:vaxuapp/models/api_error.dart';
+import 'package:vaxuapp/models/api_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-String _baseUrl = "http://${URL_HOST}/";
+String _baseUrl = "http://$URL_HOST/";
 Future<bool> setToken(String value) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.setString('token', value);
@@ -30,7 +29,7 @@ Future<ApiResponse> authenticateUser(String username, String password) async {
 
     switch (response.statusCode) {
       case 202:
-        _apiResponse.Data = User.fromJson(json.decode(response.body));
+        _apiResponse.Data = json.decode(response.body)['token'];
         break;
       case 401:
         _apiResponse.ApiError = ApiError.fromJson(json.decode(response.body));
@@ -45,15 +44,8 @@ Future<ApiResponse> authenticateUser(String username, String password) async {
   return _apiResponse;
 }
 
-Future<ApiResponse> registerUser(
-    String username,
-    String password,
-    String phone,
-    String email,
-    String blood_group,
-    String age,
-    String city,
-    String country) async {
+Future<ApiResponse> registerUser(String username, String password, String phone, String email,
+    String blood_group, String age, String city, String country) async {
   ApiResponse _apiResponse = new ApiResponse();
   try {
     print(_baseUrl);
@@ -85,8 +77,8 @@ Future<ApiResponse> registerUser(
   return _apiResponse;
 }
 
-Future<ApiResponse> registerVaccUser(String firstname, String lastname,
-    File profile_img, String dob, String gender, File adhaar_img) async {
+Future<ApiResponse> registerVaccUser(String firstname, String lastname, File profile_img,
+    String dob, String gender, File adhaar_img) async {
   ApiResponse _apiResponse = new ApiResponse();
   try {
     final response = await http.post('${_baseUrl}api/ekyc/register/', body: {

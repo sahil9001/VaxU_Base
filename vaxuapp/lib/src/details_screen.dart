@@ -1,14 +1,9 @@
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/Widget/weeklyChart.dart';
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/home_final_screen.dart';
-import 'package:vaxuapp/src/home_screen.dart';
+import 'package:vaxuapp/screens/menu/menu.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<TT> fetchAlbum() async {
@@ -90,10 +85,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 return SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
@@ -108,13 +101,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                             Text(
-                                "City Cases",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
+                            Text(
+                              "City Cases",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(fontWeight: FontWeight.bold),
+                            ),
                             buildTitleWithMoreIcon(),
                             SizedBox(height: 15),
                             buildCaseNumber(
@@ -136,18 +129,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 buildInfoTextWithPercentage(
-                                  percentage:
-                                      ((snapshot.data.tt.total.recovered /
-                                                  snapshot.data.tt.total
-                                                      .confirmed) *
-                                              100.0)
-                                          .toStringAsFixed(3),
+                                  percentage: ((snapshot.data.tt.total.recovered /
+                                              snapshot.data.tt.total.confirmed) *
+                                          100.0)
+                                      .toStringAsFixed(3),
                                   title: "Recovery Rate",
                                 ),
                                 buildInfoTextWithPercentage(
                                   percentage: ((snapshot.data.tt.total.deaths /
-                                              snapshot
-                                                  .data.tt.total.confirmed) *
+                                              snapshot.data.tt.total.confirmed) *
                                           100.0)
                                       .toStringAsFixed(3),
                                   title: "Death Rate",
@@ -171,9 +161,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     .headline6
                                     .copyWith(fontWeight: FontWeight.bold),
                               ),
-                              buildHelp("Dial 676 for groceries\n","\nEvery vegetable you need is just a call away!"),
-                              buildHelpLeft("Dial 677 for medicines\n","\nMedicines available at your footsteps!"),
-                              buildHelpEmergency("Dial 112 in Emergency\n","\nDial only when there's an emergency!"),
+                              buildHelp("Dial 676 for groceries\n",
+                                  "\nEvery vegetable you need is just a call away!"),
+                              buildHelpLeft("Dial 677 for medicines\n",
+                                  "\nMedicines available at your footsteps!"),
+                              buildHelpEmergency("Dial 112 in Emergency\n",
+                                  "\nDial only when there's an emergency!"),
                               SizedBox(height: 40),
                             ],
                           ),
@@ -191,7 +184,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  Container buildHelp(String content,String description) {
+  Container buildHelp(String content, String description) {
     return Container(
       height: 150,
       width: double.infinity,
@@ -221,10 +214,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 children: [
                   TextSpan(
                     text: "$content",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: Colors.white),
+                    style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
                   ),
                   TextSpan(
                     text: "$description",
@@ -237,8 +227,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 15),
-            child: Icon(Icons.local_grocery_store,size: 100,color: Colors.white,),
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+            child: Icon(
+              Icons.local_grocery_store,
+              size: 100,
+              color: Colors.white,
+            ),
           ),
           Positioned(
             top: 30,
@@ -250,7 +244,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  Container buildHelpEmergency(String content,String description) {
+  Container buildHelpEmergency(String content, String description) {
     return Container(
       height: 150,
       width: double.infinity,
@@ -280,10 +274,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 children: [
                   TextSpan(
                     text: "$content",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: Colors.white),
+                    style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
                   ),
                   TextSpan(
                     text: "$description",
@@ -296,8 +287,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 15),
-            child: Icon(Icons.local_hospital_rounded,size: 100,color: Colors.white,),
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+            child: Icon(
+              Icons.local_hospital_rounded,
+              size: 100,
+              color: Colors.white,
+            ),
           ),
           Positioned(
             top: 30,
@@ -308,7 +303,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
       ),
     );
   }
-Container buildHelpLeft(String content,String description) {
+
+  Container buildHelpLeft(String content, String description) {
     return Container(
       height: 150,
       width: double.infinity,
@@ -338,10 +334,7 @@ Container buildHelpLeft(String content,String description) {
                 children: [
                   TextSpan(
                     text: "$content",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: Colors.white),
+                    style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
                   ),
                   TextSpan(
                     text: "$description",
@@ -354,8 +347,12 @@ Container buildHelpLeft(String content,String description) {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 205,vertical: 10),
-            child: Icon(Icons.healing,size: 100,color: Colors.white,),
+            padding: const EdgeInsets.symmetric(horizontal: 205, vertical: 10),
+            child: Icon(
+              Icons.healing,
+              size: 100,
+              color: Colors.white,
+            ),
           ),
           Positioned(
             top: 30,
@@ -366,6 +363,7 @@ Container buildHelpLeft(String content,String description) {
       ),
     );
   }
+
   RichText buildInfoTextWithPercentage({String title, String percentage}) {
     return RichText(
       text: TextSpan(
@@ -394,10 +392,7 @@ Container buildHelpLeft(String content,String description) {
       children: <Widget>[
         Text(
           "$data ",
-          style: Theme.of(context)
-              .textTheme
-              .headline2
-              .copyWith(color: kPrimaryColor, height: 1.2),
+          style: Theme.of(context).textTheme.headline2.copyWith(color: kPrimaryColor, height: 1.2),
         ),
         Text(
           "$percentage%",
@@ -411,9 +406,7 @@ Container buildHelpLeft(String content,String description) {
   Row buildTitleWithMoreIcon() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        
-      ],
+      children: <Widget>[],
     );
   }
 
@@ -427,8 +420,8 @@ Container buildHelpLeft(String content,String description) {
           color: kPrimaryColor,
         ),
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => HomeFinalScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) => MenuScreen()));
         },
       ),
       actions: <Widget>[],
