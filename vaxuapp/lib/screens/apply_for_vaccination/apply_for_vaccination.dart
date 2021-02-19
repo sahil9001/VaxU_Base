@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/kyc_form.dart';
-import 'package:vaxuapp/src/profile_page.dart';
-import 'package:vaxuapp/src/successapplication.dart';
+import 'package:vaxuapp/screens/apply_for_vaccination/widgets/kyc_form.dart';
+import 'package:vaxuapp/screens/menu/tabs/profile/profile.dart';
+import 'package:vaxuapp/screens/apply_for_vaccination/widgets/successapplication.dart';
 import 'package:http/http.dart' as http;
 
 class ApplyResponse {

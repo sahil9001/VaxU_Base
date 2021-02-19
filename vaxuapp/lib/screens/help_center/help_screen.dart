@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/profile_page.dart';
+import 'package:vaxuapp/screens/menu/tabs/profile/profile.dart';
 
 class HelpScreen extends StatefulWidget {
   @override
@@ -39,6 +39,15 @@ class _HelpScreenState extends State<HelpScreen> {
           ),
           Center(
             child: Text(
+              "Siddharth Mishra",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Center(
+            child: Text(
               "Sahil Silare",
               style: TextStyle(fontSize: 20),
             ),
@@ -48,7 +57,7 @@ class _HelpScreenState extends State<HelpScreen> {
           ),
           Center(
             child: Text(
-              "Sanjeeb Nath",
+              "Amitesh Aggrawal",
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -57,16 +66,7 @@ class _HelpScreenState extends State<HelpScreen> {
           ),
           Center(
             child: Text(
-              "Aryan Sarkar",
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Center(
-            child: Text(
-              "Amitesh Agrawal",
+              "Prakhar Asaiya",
               style: TextStyle(fontSize: 20),
             ),
           )

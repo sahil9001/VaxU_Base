@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:vaxuapp/constants.dart';
 import 'package:vaxuapp/models/api_error.dart';
 import 'package:vaxuapp/models/api_response.dart';
-import 'package:vaxuapp/src/profile_page.dart';
+import 'package:vaxuapp/screens/menu/tabs/profile/profile.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;

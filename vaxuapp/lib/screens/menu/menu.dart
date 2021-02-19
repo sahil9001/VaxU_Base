@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/audiorecord.dart';
-import 'package:vaxuapp/src/details_screen.dart';
-import 'package:vaxuapp/src/home_screen.dart';
-import 'package:vaxuapp/src/hospital_screen.dart';
-import 'package:vaxuapp/src/profile_page.dart';
+import 'package:vaxuapp/screens/menu/tabs/check/audiorecord.dart';
+import 'package:vaxuapp/screens/menu/tabs/city/details_screen.dart';
+import 'package:vaxuapp/screens/menu/tabs/statistics/home_screen.dart';
+import 'package:vaxuapp/screens/menu/tabs/hospitals/hospital_screen.dart';
+import 'package:vaxuapp/screens/menu/tabs/profile/profile.dart';
 
 class MenuScreen extends StatefulWidget {
   @override

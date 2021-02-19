@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/help_screen.dart';
-import 'package:vaxuapp/src/apply_for_vaccination.dart';
-import 'package:vaxuapp/src/profile_details_screen.dart';
+import 'package:vaxuapp/screens/help_center/help_screen.dart';
+import 'package:vaxuapp/screens/apply_for_vaccination/apply_for_vaccination.dart';
+import 'package:vaxuapp/screens/profile_detail/profile_details_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'profile_menu.dart';

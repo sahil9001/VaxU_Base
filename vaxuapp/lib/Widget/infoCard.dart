@@ -1,5 +1,5 @@
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/Widget/lineChart.dart';
+import 'package:vaxuapp/Widget/lineChart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -9,13 +9,7 @@ class InfoCard extends StatelessWidget {
   final Color iconColor;
   final Function press;
   final int type;
-  const InfoCard(
-      {Key key,
-      this.title,
-      this.effectedNum,
-      this.iconColor,
-      this.press,
-      this.type})
+  const InfoCard({Key key, this.title, this.effectedNum, this.iconColor, this.press, this.type})
       : super(key: key);
 
   @override
@@ -77,10 +71,7 @@ class InfoCard extends StatelessWidget {
                               children: [
                                 TextSpan(
                                   text: "$effectedNum \n",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.headline6.copyWith(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 15,
                                       ),

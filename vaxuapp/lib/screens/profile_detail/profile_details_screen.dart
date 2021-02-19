@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/profile_page.dart';
+import 'package:vaxuapp/screens/menu/tabs/profile/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
