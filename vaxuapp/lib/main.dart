@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/home_final_screen.dart';
-import 'package:vaxuapp/src/loginPage.dart';
-import 'package:vaxuapp/src/profile_page.dart';
+import 'package:vaxuapp/screens/login/login.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,8 +11,6 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginPage(),
         '/login': (context) => LoginPage(),
-        '/home': (context) => HomeFinalScreen(),
-        '/profile': (context) => ProfileScreen()
       },
       theme: ThemeData(
         primarySwatch: Colors.green,

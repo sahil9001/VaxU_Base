@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io' as io;
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_audio_recorder/flutter_audio_recorder.dart';
-import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:vaxuapp/constants.dart';
@@ -17,31 +14,27 @@ class Prediction {
   final String verdict;
   Prediction({this.verdict});
   factory Prediction.fromJson(Map<String, dynamic> json) {
-    return new Prediction(
-        verdict: json['verdict']);
+    return new Prediction(verdict: json['verdict']);
   }
 }
 
-
-Future<Prediction> postAudio(
-    Recording audio_path) async {
+Future<Prediction> postAudio(Recording audio_path) async {
   String uploadURL = "http://${URL_HOST}/api/covidaudio/";
   String filename = audio_path.path;
   var request = http.MultipartRequest('POST', Uri.parse(uploadURL));
-  request.files
-      .add(await http.MultipartFile.fromPath('covidaudio', filename));
+  request.files.add(await http.MultipartFile.fromPath('covidaudio', filename));
   //
   final res = await request.send();
   final respStr = await res.stream.bytesToString();
 
   print(res.statusCode);
-  if(res.statusCode==200){
+  if (res.statusCode == 200) {
     return Prediction.fromJson(jsonDecode(respStr));
-  }
-  else{
+  } else {
     throw Exception("Failed to load verdict");
   }
 }
+
 class SoundScreen extends StatefulWidget {
   @override
   _SoundScreenState createState() => new _SoundScreenState();
@@ -51,9 +44,9 @@ class _SoundScreenState extends State<SoundScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: new RecorderExample(),
-        ),
+      body: SafeArea(
+        child: new RecorderExample(),
+      ),
     );
   }
 }
@@ -61,8 +54,7 @@ class _SoundScreenState extends State<SoundScreen> {
 class RecorderExample extends StatefulWidget {
   final LocalFileSystem localFileSystem;
 
-  RecorderExample({localFileSystem})
-      : this.localFileSystem = localFileSystem ?? LocalFileSystem();
+  RecorderExample({localFileSystem}) : this.localFileSystem = localFileSystem ?? LocalFileSystem();
 
   @override
   State<StatefulWidget> createState() => new RecorderExampleState();
@@ -85,78 +77,72 @@ class RecorderExampleState extends State<RecorderExample> {
     return new Center(
       child: new Padding(
         padding: new EdgeInsets.all(8.0),
-        child: new Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: new Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: new FlatButton(
-                      onPressed: () {
-                        switch (_currentStatus) {
-                          case RecordingStatus.Initialized:
-                            {
-                              _start();
-                              break;
-                            }
-                          case RecordingStatus.Recording:
-                            {
-                              _pause();
-                              break;
-                            }
-                          case RecordingStatus.Paused:
-                            {
-                              _resume();
-                              break;
-                            }
-                          case RecordingStatus.Stopped:
-                            {
-                              _init();
-                              break;
-                            }
-                          default:
-                            break;
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: new FlatButton(
+                  onPressed: () {
+                    switch (_currentStatus) {
+                      case RecordingStatus.Initialized:
+                        {
+                          _start();
+                          break;
                         }
-                      },
-                      child: _buildText(_currentStatus),
-                      color: Colors.lightGreen,
-                    ),
-                  ),
-                  new FlatButton(
-                    onPressed:
-                        _currentStatus != RecordingStatus.Unset ? _stop : null,
-                    child:
-                        new Text("Stop", style: TextStyle(color: Colors.white)),
-                    color: Colors.greenAccent.withOpacity(0.5),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  new FlatButton(
-                    onPressed: onPlayAudio,
-                    child:
-                        new Text("Play", style: TextStyle(color: Colors.white)),
-                    color: Colors.greenAccent.withOpacity(0.5),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  new FlatButton(
-                    onPressed: onSubmitAudio,
-                    child:
-                        new Text("Submit", style: TextStyle(color: Colors.white)),
-                    color: Colors.greenAccent.withOpacity(0.5),
-                  ),
-                ],
+                      case RecordingStatus.Recording:
+                        {
+                          _pause();
+                          break;
+                        }
+                      case RecordingStatus.Paused:
+                        {
+                          _resume();
+                          break;
+                        }
+                      case RecordingStatus.Stopped:
+                        {
+                          _init();
+                          break;
+                        }
+                      default:
+                        break;
+                    }
+                  },
+                  child: _buildText(_currentStatus),
+                  color: Colors.lightGreen,
+                ),
               ),
-              new Text("Status : $_currentStatus"),
-              new Text("File path of the record: ${_current?.path}"),
-              new Text("Format: ${_current?.audioFormat}"),
-              new Text("Extension : ${_current?.extension}"),
-              new Text("CovidStatus : $_covidstatus")
-            ]),
+              new FlatButton(
+                onPressed: _currentStatus != RecordingStatus.Unset ? _stop : null,
+                child: new Text("Stop", style: TextStyle(color: Colors.white)),
+                color: Colors.greenAccent.withOpacity(0.5),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              new FlatButton(
+                onPressed: onPlayAudio,
+                child: new Text("Play", style: TextStyle(color: Colors.white)),
+                color: Colors.greenAccent.withOpacity(0.5),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              new FlatButton(
+                onPressed: onSubmitAudio,
+                child: new Text("Submit", style: TextStyle(color: Colors.white)),
+                color: Colors.greenAccent.withOpacity(0.5),
+              ),
+            ],
+          ),
+          new Text("Status : $_currentStatus"),
+          new Text("File path of the record: ${_current?.path}"),
+          new Text("Format: ${_current?.audioFormat}"),
+          new Text("Extension : ${_current?.extension}"),
+          new Text("CovidStatus : $_covidstatus")
+        ]),
       ),
     );
   }
@@ -174,15 +160,13 @@ class RecorderExampleState extends State<RecorderExample> {
         }
 
         // can add extension like ".mp4" ".wav" ".m4a" ".aac"
-        customPath = appDocDirectory.path +
-            customPath +
-            DateTime.now().millisecondsSinceEpoch.toString();
+        customPath =
+            appDocDirectory.path + customPath + DateTime.now().millisecondsSinceEpoch.toString();
 
         // .wav <---> AudioFormat.WAV
         // .mp4 .m4a .aac <---> AudioFormat.AAC
         // AudioFormat is optional, if given value, will overwrite path extension when there is conflicts.
-        _recorder =
-            FlutterAudioRecorder(customPath, audioFormat: AudioFormat.WAV);
+        _recorder = FlutterAudioRecorder(customPath, audioFormat: AudioFormat.WAV);
 
         await _recorder.initialized;
         // after initialization
@@ -195,8 +179,8 @@ class RecorderExampleState extends State<RecorderExample> {
           print(_currentStatus);
         });
       } else {
-        Scaffold.of(context).showSnackBar(
-            new SnackBar(content: new Text("You must accept permissions")));
+        Scaffold.of(context)
+            .showSnackBar(new SnackBar(content: new Text("You must accept permissions")));
       }
     } catch (e) {
       print(e);
@@ -284,14 +268,13 @@ class RecorderExampleState extends State<RecorderExample> {
     AudioPlayer audioPlayer = AudioPlayer();
     await audioPlayer.play(_current.path, isLocal: true);
   }
+
   void onSubmitAudio() async {
     Prediction pred = await postAudio(_current);
     _covidstatus = pred.verdict;
-      if (_covidstatus == "True")
-      Scaffold.of(context).showSnackBar(
-            new SnackBar(content: new Text("True")));
-      else
-      Scaffold.of(context).showSnackBar(
-            new SnackBar(content: new Text("False")));
+    if (_covidstatus == "True")
+      Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("True")));
+    else
+      Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("False")));
   }
 }

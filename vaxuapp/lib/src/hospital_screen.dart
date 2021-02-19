@@ -1,15 +1,8 @@
-import 'dart:io';
-
 import 'package:vaxuapp/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/home_final_screen.dart';
-import 'package:vaxuapp/src/models/user.dart';
-import 'package:flutter_svg/svg.dart';
-
+import 'package:vaxuapp/screens/menu/menu.dart';
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,9 +23,10 @@ class VaccinatorsList {
 }
 
 Future<VaccinatorsList> fetchVaccinators() async {
-  String token = await User().getToken();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = prefs.getString("token");
   final response = await http.get(
-    'http://${URL_HOST}/api/users/vaccinators/',
+    'http://$URL_HOST/api/users/vaccinators/',
     headers: {'accept': 'application/json', "Authorization": "$token"},
   );
   if (response.statusCode == 200) {
@@ -244,10 +238,7 @@ class _HospitalScreenState extends State<HospitalScreen> {
       children: <Widget>[
         Text(
           data,
-          style: Theme.of(context)
-              .textTheme
-              .headline5
-              .copyWith(color: kPrimaryColor, height: 1.2),
+          style: Theme.of(context).textTheme.headline5.copyWith(color: kPrimaryColor, height: 1.2),
         ),
       ],
     );
@@ -263,8 +254,8 @@ class _HospitalScreenState extends State<HospitalScreen> {
           color: kPrimaryColor,
         ),
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => HomeFinalScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) => MenuScreen()));
         },
       ),
       actions: <Widget>[],

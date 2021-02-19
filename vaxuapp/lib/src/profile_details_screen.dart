@@ -3,15 +3,14 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/models/user.dart';
 import 'package:vaxuapp/src/profile_page.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 Future<UserInfo> fetchUserInfo() async {
-  String token = await User().getToken();
-  final response = await http.get('http://${URL_HOST}/api/users/info/',
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = prefs.getString("token");
+  final response = await http.get('http://$URL_HOST/api/users/info/',
       headers: {'accept': 'application/json', "Authorization": "$token"});
   if (response.statusCode == 200) {
     return UserInfo.fromJson(jsonDecode(response.body));
@@ -86,8 +85,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                     children: [
                       Text(
                         "User Details",
-                        style: TextStyle(
-                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 20),
                       Container(
@@ -97,8 +95,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "Username",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -120,8 +117,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "Phone number",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -143,8 +139,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "Email",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -166,8 +161,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "Blood Group",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -189,8 +183,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "Age",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -212,8 +205,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "City",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -235,8 +227,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "Country",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -258,8 +249,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "Applied for vaccination status",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -268,10 +258,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 readOnly: true,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText:
-                                        snapshot.data.applied_for_vaccination
-                                            ? "Yes"
-                                            : "No",
+                                    hintText: snapshot.data.applied_for_vaccination ? "Yes" : "No",
                                     fillColor: Color(0xfff3f3f4),
                                     filled: true))
                           ],
@@ -284,8 +271,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                           children: <Widget>[
                             Text(
                               "Vaccinated?",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(
                               height: 10,
@@ -294,9 +280,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                 readOnly: true,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: snapshot.data.is_vaccinated
-                                        ? "Yes"
-                                        : "No",
+                                    hintText: snapshot.data.is_vaccinated ? "Yes" : "No",
                                     fillColor: Color(0xfff3f3f4),
                                     filled: true))
                           ],
@@ -313,12 +297,6 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
     );
   }
 
-  _loadUserInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String email = await User().getEmail();
-    print(prefs.getString('email'));
-  }
-
   AppBar buildDetailsAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: kBackgroundColor,
@@ -329,8 +307,8 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
           color: kPrimaryColor,
         ),
         onPressed: () {
-          Navigator.of(context).pop(MaterialPageRoute(
-              builder: (BuildContext context) => ProfileScreen()));
+          Navigator.of(context)
+              .pop(MaterialPageRoute(builder: (BuildContext context) => ProfileScreen()));
         },
       ),
       actions: <Widget>[],
