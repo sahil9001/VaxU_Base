@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/landing.dart';
 import 'package:vaxuapp/src/audiorecord.dart';
 import 'package:vaxuapp/src/details_screen.dart';
 import 'package:vaxuapp/src/home_screen.dart';
 import 'package:vaxuapp/src/hospital_screen.dart';
-import 'package:vaxuapp/src/loginPage.dart';
 import 'package:vaxuapp/src/profile_page.dart';
-import 'package:vaxuapp/src/welcomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void _getUser() async {
@@ -40,7 +37,7 @@ class _HomeFinalScreenState extends State<HomeFinalScreen> {
         child = HospitalScreen();
         break;
 
-      case 3: 
+      case 3:
         child = SoundScreen();
         break;
 
@@ -63,23 +60,21 @@ class _HomeFinalScreenState extends State<HomeFinalScreen> {
       items: [
         new BottomNavigationBarItem(
           icon: Icon(Icons.graphic_eq),
-          // ignore: deprecated_member_use
-          title: Text('Statistics'),
+          label: "Statistics",
         ),
         new BottomNavigationBarItem(
           icon: Icon(Icons.local_activity),
-          title: Text('City'),
+          label: "City",
         ),
         new BottomNavigationBarItem(
           icon: Icon(Icons.local_hospital),
-          title: Text('Hospitals'),
+          label: "Hospitals",
         ),
         new BottomNavigationBarItem(
           icon: Icon(Icons.coronavirus),
-          title: Text('Check'),
+          label: "Check",
         ),
-        new BottomNavigationBarItem(
-            icon: Icon(Icons.person), title: Text('Profile')),
+        new BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
       ],
     );
   }
