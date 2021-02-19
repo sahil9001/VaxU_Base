@@ -31,8 +31,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pop(MaterialPageRoute(
-            builder: (BuildContext context) => WelcomePage()));
+        Navigator.of(context)
+            .pop(MaterialPageRoute(builder: (BuildContext context) => WelcomePage()));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -42,8 +42,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
               child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
             ),
-            Text('Back',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
+            Text('Back', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
           ],
         ),
       ),
@@ -97,16 +96,12 @@ class _LoginPageState extends State<LoginPage> {
             child: Container(
               decoration: BoxDecoration(
                 color: Color(0xff1959a9),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(5),
-                    topLeft: Radius.circular(5)),
+                borderRadius:
+                    BorderRadius.only(bottomLeft: Radius.circular(5), topLeft: Radius.circular(5)),
               ),
               alignment: Alignment.center,
               child: Text('f',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w400)),
+                  style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w400)),
             ),
           ),
           Expanded(
@@ -115,15 +110,11 @@ class _LoginPageState extends State<LoginPage> {
               decoration: BoxDecoration(
                 color: Color(0xff2872ba),
                 borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(5),
-                    topRight: Radius.circular(5)),
+                    bottomRight: Radius.circular(5), topRight: Radius.circular(5)),
               ),
               alignment: Alignment.center,
               child: Text('Log in with Facebook',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400)),
+                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400)),
             ),
           ),
         ],
@@ -134,8 +125,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
@@ -153,10 +143,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text(
               'Register',
-              style: TextStyle(
-                  color: Color(0xFF0D8E53),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+              style: TextStyle(color: Color(0xFF0D8E53), fontSize: 13, fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -181,16 +168,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void showInSnackBar(String value) {
-    _scaffoldKey.currentState
-        .showSnackBar(new SnackBar(content: new Text(value)));
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text(value)));
   }
 
   void _saveAndRedirectToHome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("token", (_apiResponse.Data as User).token);
     print(prefs.getString('token'));
-    Navigator.pushNamedAndRemoveUntil(
-        context, '/home', ModalRoute.withName('/home'),
+    Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/home'),
         arguments: (_apiResponse.Data as User));
   }
 
@@ -210,7 +195,6 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Form(
-                  autovalidate: true,
                   key: _formKey,
                   child: SingleChildScrollView(
                     child: Column(
@@ -257,8 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                               padding: EdgeInsets.symmetric(vertical: 15),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
+                                  borderRadius: BorderRadius.all(Radius.circular(5)),
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
                                         color: Colors.grey.shade200,
@@ -269,22 +252,17 @@ class _LoginPageState extends State<LoginPage> {
                                   gradient: LinearGradient(
                                       begin: Alignment.centerLeft,
                                       end: Alignment.centerRight,
-                                      colors: [
-                                        Color(0xFF0D8E53),
-                                        Color(0xFF0D8E53)
-                                      ])),
+                                      colors: [Color(0xFF0D8E53), Color(0xFF0D8E53)])),
                               child: Text(
                                 'Login',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
+                                style: TextStyle(fontSize: 20, color: Colors.white),
                               ),
                             )),
                         Container(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           alignment: Alignment.centerRight,
                           child: Text('Forgot Password ?',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500)),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                         ),
                         _divider(),
                         _facebookButton(),
