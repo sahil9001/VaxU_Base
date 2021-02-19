@@ -1,15 +1,10 @@
 import 'package:vaxuapp/constants.dart';
-import 'package:vaxuapp/src/details_screen.dart';
 import 'package:vaxuapp/src/Widget/infoCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-
-//
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<TT> fetchAlbum() async {
@@ -92,8 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(
-                        left: 20, top: 20, right: 20, bottom: 20),
+                    padding: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: kPrimaryColor.withOpacity(0.03),
@@ -221,10 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   TextSpan(
                     text: "Dial 901 for \nMedical Help!\n",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: Colors.white),
+                    style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
                   ),
                   TextSpan(
                     text: "If any symptoms appear",
@@ -284,10 +275,7 @@ class PreventitonCard extends StatelessWidget {
         SvgPicture.asset(svgSrc),
         Text(
           title,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(color: kPrimaryColor),
+          style: Theme.of(context).textTheme.bodyText1.copyWith(color: kPrimaryColor),
         )
       ],
     );

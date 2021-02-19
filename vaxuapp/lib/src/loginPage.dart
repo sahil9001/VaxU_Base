@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vaxuapp/src/home_final_screen.dart';
-import 'package:vaxuapp/src/home_screen.dart';
 import 'package:vaxuapp/src/models/api_error.dart';
 import 'package:vaxuapp/src/models/api_response.dart';
 import 'package:vaxuapp/src/models/user.dart';
 import 'package:vaxuapp/src/services/api.dart';
 import 'package:vaxuapp/src/signup.dart';
-import 'package:vaxuapp/src/welcomePage.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:vaxuapp/src/Widget/beizerContainer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,26 +23,6 @@ class _LoginPageState extends State<LoginPage> {
   ApiResponse _apiResponse = new ApiResponse();
   String _password = "";
   String _username = "";
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context)
-            .pop(MaterialPageRoute(builder: (BuildContext context) => WelcomePage()));
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text('Back', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _divider() {
     return Container(
@@ -183,105 +158,104 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-        key: _scaffoldKey,
-        body: Container(
-          height: height,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                  top: -height * .15,
-                  right: -MediaQuery.of(context).size.width * .4,
-                  child: BezierContainer()),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: height * .2),
-                        _title(),
-                        SizedBox(height: 50),
-                        TextFormField(
-                          key: Key("_username"),
-                          decoration: InputDecoration(labelText: "Username"),
-                          keyboardType: TextInputType.text,
-                          onSaved: (String value) {
-                            _username = value;
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Username is required';
-                            }
-                            return null;
-                          },
-                        ),
-                        TextFormField(
-                          key: Key("_password"),
-                          decoration: InputDecoration(labelText: "Password"),
-                          keyboardType: TextInputType.text,
-                          obscureText: true,
-                          onSaved: (String value) {
-                            _password = value;
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Password is required';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 20),
-                        InkWell(
-                            onTap: _handleSubmitted,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              padding: EdgeInsets.symmetric(vertical: 15),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                        color: Colors.grey.shade200,
-                                        offset: Offset(2, 4),
-                                        blurRadius: 5,
-                                        spreadRadius: 2)
-                                  ],
-                                  gradient: LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [Color(0xFF0D8E53), Color(0xFF0D8E53)])),
-                              child: Text(
-                                'Login',
-                                style: TextStyle(fontSize: 20, color: Colors.white),
-                              ),
-                            )),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          alignment: Alignment.centerRight,
-                          child: Text('Forgot Password ?',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                        ),
-                        _divider(),
-                        _facebookButton(),
-                        SizedBox(height: height * .055),
-                        _createAccountLabel(),
-                      ],
-                    ),
+      key: _scaffoldKey,
+      body: Container(
+        height: height,
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+                top: -height * .15,
+                right: -MediaQuery.of(context).size.width * .4,
+                child: BezierContainer()),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: height * .2),
+                      _title(),
+                      SizedBox(height: 50),
+                      TextFormField(
+                        key: Key("_username"),
+                        decoration: InputDecoration(labelText: "Username"),
+                        keyboardType: TextInputType.text,
+                        onSaved: (String value) {
+                          _username = value;
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Username is required';
+                          }
+                          return null;
+                        },
+                      ),
+                      TextFormField(
+                        key: Key("_password"),
+                        decoration: InputDecoration(labelText: "Password"),
+                        keyboardType: TextInputType.text,
+                        obscureText: true,
+                        onSaved: (String value) {
+                          _password = value;
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Password is required';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      InkWell(
+                          onTap: _handleSubmitted,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      color: Colors.grey.shade200,
+                                      offset: Offset(2, 4),
+                                      blurRadius: 5,
+                                      spreadRadius: 2)
+                                ],
+                                gradient: LinearGradient(
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    colors: [Color(0xFF0D8E53), Color(0xFF0D8E53)])),
+                            child: Text(
+                              'Login',
+                              style: TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                          )),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        alignment: Alignment.centerRight,
+                        child: Text('Forgot Password ?',
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                      ),
+                      _divider(),
+                      _facebookButton(),
+                      SizedBox(height: height * .055),
+                      _createAccountLabel(),
+                    ],
                   ),
                 ),
               ),
-              Positioned(top: 40, left: 0, child: _backButton()),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _handleSubmitted() async {
     final FormState form = _formKey.currentState;
-
     if (!form.validate()) {
       showInSnackBar('Please fix the errors in red before submitting.');
     } else {
