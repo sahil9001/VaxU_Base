@@ -165,51 +165,7 @@
           </div>
         </div>
       </div>
-    </footer>-->
-    <script>
-      var host = "sahil9001.github.io/VaxU_Base/";
-      function trylogin() {
-        var _token;
-        var userName = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-        var urlToHit =
-          "https://cors-anywhere.herokuapp.com/http://20.198.3.123:80/api/users/vacc/login/";
-        var request = new XMLHttpRequest();
-
-        function getToken(urlToHit, email, password) {
-          var key;
-          request.open("POST", urlToHit, true);
-          request.setRequestHeader("Content-type", "application/json");
-          request.onreadystatechange = function () {
-            if (request.readyState == 4 && request.status == 202) {
-              var response = request.responseText;
-              var obj = JSON.parse(response);
-              console.log(obj);
-              key = obj.token;
-              localStorage.setItem(email, key);
-              console.log("token is : " + key);
-              success(userName);
-            }
-          };
-          var data = {
-            email: email,
-            password: password,
-          };
-          console.log(data);
-          request.send(JSON.stringify(data));
-          console.log(request.status);
-          console.log("Hi");
-        }
-        //request.withCredentials = true;
-        getToken(urlToHit, userName, password);
-      }
-      function success(userName) {
-        //curr_url = location.href;
-        var name = "username=" + userName;
-        document.cookie = name;
-        location.href = "http://" + host + "dashboard.html";
-      }
-    </script>
-    <!-- <script language="JavaScript" type="text/javascript" src="styles/app.js"></script>-->
+    </footer>
+   <script type="text/javascript" src="styles/login.js"></script>
   </body>
 </html>

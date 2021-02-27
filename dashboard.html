@@ -31,7 +31,7 @@
       var exists = localStorage.length;
       if (!exists) {
         alert("You need to login first!");
-        var host = "sahil9001.github.io/VaxU_Base";
+        var host = "Hard-Coder05.github.io/NEXA-VaxU";
         window.location.href = "http://" + host;
       }
     </script>
@@ -67,12 +67,6 @@
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item"> Home </a>
-            <a class="navbar-item" href="#whyus"> Why VaxU? </a>
-            <a class="navbar-item"> Home </a>
-            <a class="navbar-item"> Get VaxU </a>
-          </div>
           <div class="navbar-end">
             <div class="navbar-item">
               <p id="welcome">Welcome</p>
@@ -98,7 +92,7 @@
               <div class="card-image">
                 <figure class="image is-4by3">
                   <img
-                    src="assets/img/vaccines-image-edit.jpg"
+                    src="assets/img/vaccines-image-edit.svg"
                     alt="vaccine_image"
                   />
                 </figure>
@@ -115,7 +109,7 @@
             <div class="card">
               <div class="card-image">
                 <figure class="image is-4by3">
-                  <img src="assets/img/cost-vaccine.jpg" alt="vaccine_image" />
+                  <img src="assets/img/cost-vaccine.svg" alt="vaccine_image" />
                   <!-- https://bulma.io/images/placeholders/1280x960.png-->
                 </figure>
               </div>
@@ -131,7 +125,7 @@
             <div class="card">
               <div class="card-image">
                 <figure class="image is-4by3">
-                  <img src="assets/img/available2.png" alt="vaccine_image" />
+                  <img src="assets/img/available2.svg" alt="vaccine_image" />
                 </figure>
               </div>
               <div class="card-content">
@@ -281,7 +275,23 @@
       <div class="container">
         <div class="columns">
           <div class="column is-two-fifths is-hidden-mobile">
-            <span class="copyright"> Made by Team --- </span>
+            <span class="copyright"> © 2021 Team NEXA </span>
+            <br />
+            <br />
+            <br />
+
+            <span>Team Members: </span>
+            <br />
+            <span>Sahil Silare (2nd year CSE)</span>
+            <br />
+            <span>Prakhar Asaiya (2nd year CSE)</span>
+            <br />
+            <span>Siddharth Mishra (2nd year CSE)</span>
+            <br />
+            <span>Amitesh Agrawal (2nd year CSE)</span>
+          </div>
+          <div class="column">
+            NIT Raipur, GE Road, Raipur, Chhatissgarh (492007)
           </div>
           <div class="column has-text-right">
             <iframe
@@ -320,6 +330,22 @@
         };
       }
       toasterOptions();
+      const ts = [
+        {
+          1: "9AM - 10AM",
+          2: "10AM - 11AM",
+          3: "11AM - 12PM",
+          4: "12PM - 1PM",
+          5: "1PM - 2PM",
+          6: "2PM - 3PM",
+          7: "3PM - 4PM",
+          8: "4PM - 5PM",
+          9: "5PM - 6PM",
+          10: "6PM - 7PM",
+          11: "7PM - 8PM",
+          12: "8PM - 9PM",
+        },
+      ];
 
       document.addEventListener("DOMContentLoaded", () => {
         // 1. Display file name when select file
@@ -351,7 +377,7 @@
       });
 
       var userList;
-      var host = "sahil9001.github.io/VaxU_Base";
+      var host = "Hard-Coder05.github.io/NEXA-VaxU";
       console.log(typeof document.cookie);
       var name = getCookie("username");
       console.log(name);
@@ -410,13 +436,6 @@
           .getImageData(0, 0, canvas.width, canvas.height)
           .data.some((channel) => channel !== 0);
       }
-      console.log(isCanvasBlank(canvasElement));
-      /*
-                  function download() {
-                  var dt = canvas.toDataURL('image/png');
-                  this.href = dt;
-              };
-                  downloadLnk.addEventListener('click', download, false);*/
 
       $(document).ready(function () {
         function getvalues() {
@@ -464,13 +483,15 @@
                 x = "";
               userList = JSON.parse(response);
               for (i = 0; i < userList.length; i++) {
+                var time = ts[0][userList[i].timeslot];
+
                 x +=
                   "<tr><td>" +
                   userList[i].patient_id +
                   "</td><td>" +
                   userList[i].patient +
                   "</td><td>" +
-                  userList[i].timeslot +
+                  time +
                   "</td></tr>";
               }
               document.getElementById("getList").innerHTML = x;
@@ -481,8 +502,6 @@
 
         loadUsers();
       });
-
-      // function submitDetails(){
 
       var urlToHit =
         "https://cors-anywhere.herokuapp.com/http://20.198.3.123:80/api/core/check/";
@@ -505,16 +524,17 @@
         })
           .then((response) => response.json())
           .then((json) => {
-            toastr.info(json);
+            var ans = json.message;
+            if (ans) {
+              toastr.info("Face matched");
+            } else {
+              toastr.error("Unable to match face");
+            }
           })
           .catch((error) => {
-            toastr.error(error);
+            toastr.error("Face not found");
           });
       };
-
-      /*document.querySelector('#fileUpload').addEventListener('click', event => {
-                handleImageUpload(event)
-              });*/
 
       console.log("submit started");
 
@@ -542,10 +562,15 @@
             })
               .then((response) => response.json())
               .then((json) => {
-                toastr.info(json);
+                console.log(json);
+                if (json.message == true) {
+                  toastr.success("Face matched");
+                } else {
+                  toastr.error("Unable to match face");
+                }
               })
               .catch((error) => {
-                toastr.error(error);
+                toastr.error("Face not detected");
               });
           } else {
             toastr.error("User List is empty");
@@ -575,91 +600,18 @@
           .catch((error) => {
             toastr.error("User does not exists or already vaccinated!");
           });
-        /*  $.ajax({
-                          type: "GET",
-                          url: host,
-                          headers: {
-                              'Authorization': token
-                          },
-                          success: function(res){
-                              toastr.success(res);
-                          },
-                          error: function(error){
-                              toastr.error(error);
-                              console.log(error);
-                          }
-                      });*/
         loadUsers();
       }
 
-      /*  var dataURL = canvasElement.toDataURL();
-                  console.log(dataURL);
-                  const fd = new FormData();
-                  var blobBin = atob(dataURL.split(',')[1]);
-                  var array = [];
-                  for(var i = 0; i < blobBin.length; i++) {
-                      array.push(blobBin.charCodeAt(i));
-                  }
-                  var file = new Blob([new Uint8Array(array)], {type: 'image/png'});
-                  console.log(file);
-                  var id = userList[0].patient_id;
-
-                  fd.append("clicked_photo", file);
-                  fd.append("patient_id", id);
-                  $.ajax({
-                     url: host,
-                     type: "POST",
-                     data: fd,
-                     processData: false,
-                     contentType: false,
-                  }).done(function(respond){
-                    alert(respond);
-                  });*/
-
-      /*fd.append('clicked_photo', dataURL);
-                  var id = userList[0].patient_id;
-                  console.log(id);
-                  console.log(userList);
-                  fd.append('patient_id', id);
-                  console.log(fd);
-                  var token = localStorage.getItem(name);
-                  fetch(urlToHit, {
-                          method: 'POST',
-                          headers: {
-                              //'Content-type': 'application/json',
-                              'Authorization' : token
-                          }
-                          body: fd
-                      })
-                  .then(res => res.json())
-                  .then(json => console.log(json))
-                  .catch(err => toastr.error(err));*/
-      //               console.log('submit started');
-      //                var urlToHit = "http://20.198.3.123:80/api/core/check";
-      //                //var canvas = document.getElementById('canvas');
-      //                if(!isCanvasBlank(canvasElement))
-      //                    {
-      //                    let blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-      //                      let response = await fetch(urlToHit, {
-      //                        method: 'POST',
-      //                        body: blob
-      //                      });
-      //
-      //                      // the server responds with confirmation and the image size
-      //                      let result = await response.json();
-      //                      alert(result.message);
-      //                    }
-      //                else{
-      //                    console.log('trying toastr');
-      //                    toastr.error('Please click an image first!');
-      //                }
-      //}
       function logout() {
         console.log(name);
         localStorage.removeItem(name);
         window.location = "http://" + host + "/";
       }
     </script>
+<<<<<<< HEAD
+=======
     <!--    <script language="JavaScript" type="text/javascript" src="styles/app.js"></script>-->
+>>>>>>> 5469c599dd81f2b3f0bd0501976f491e5640ce2c
   </body>
 </html>

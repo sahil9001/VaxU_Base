@@ -90,7 +90,7 @@ function getToken(url, clientID, clientSecret) {
 }
 */
 /************************************************* login html ***************************************/
-var host = "sahil9001.github.io/VaxU_Base/";
+var host = "Hard-Coder05.github.io/NEXA-VaxU/";
 function trylogin() {
   var _token;
   var userName = document.getElementById("username").value;
