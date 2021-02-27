@@ -10,13 +10,26 @@
     <title></title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="styles.css" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
     />
+    <!--<link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css">-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="styles/styles.css" />
     <script src="https://use.fontawesome.com/36f44874b6.js"></script>
+    <script>
+      var exists = localStorage.length;
+      if (exists > 0) {
+        var host = "Hard-Coder05.github.io/NEXA-VaxU";
+        window.location.href = "http://" + host + "/dashboard.html";
+      }
+    </script>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -25,14 +38,14 @@
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
-   <!-- <div id="preloader">
+    <!-- <div id="preloader">
         <div id="status">
             <div></div>
             <div></div>
             <div></div>
         </div>
     </div>-->
-    
+
     <nav
       class="navbar is-fixed-top signal-navbar"
       role="navigation"
@@ -66,7 +79,13 @@
 
             <div class="navbar-item">
               <div class="buttons">
-                <a class="button is-light" href="login"> Log in </a>
+                <!--<a class="button is-primary" href="login1.html"> Log in </a>-->
+                <button
+                  class="button is-primary"
+                  onclick="window.location.href='login1.html'"
+                >
+                  Login
+                </button>
               </div>
             </div>
           </div>
@@ -77,7 +96,12 @@
       <div class="hero-body">
         <div class="container">
           <div class="columns">
-            <div class="column is-two-fifths">
+            <div
+              class="column is-two-fifths"
+              data-aos="fade-zoom-in"
+              data-aos-easing="ease-in-back"
+              data-aos-duration="800"
+            >
               <h1>Vaccinate world!</h1>
               <p class="body1">
                 Welcome to the new experience of vaccination, VaxU makes it easy
@@ -92,15 +116,9 @@
                 </button>
               </p>
             </div>
-            <div class="column mobile-screenshots">
-              <img
-                class="screenshot1"
-                src="assets/screenshots/1.png"
-              />
-              <img
-                class="screenshot2"
-                src="assets/screenshots/2.png"
-              />
+            <div class="column mobile-screenshots" data-aos="zoom-in">
+              <img class="screenshot1" src="assets/screenshots/1.png" />
+              <img class="screenshot2" src="assets/screenshots/2.png" />
             </div>
           </div>
         </div>
@@ -122,7 +140,7 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-half has-text-centered">
-            <div class="box">
+            <div class="box" data-aos="fade-right" data-aos-duration="1000">
               <img src="assets/illustrations/undraw_medicine_b1ol.svg" />
               <h3>Find best doctors near you!</h3>
               <p class="body2">
@@ -132,7 +150,7 @@
             </div>
           </div>
           <div class="column is-half has-text-centered">
-            <div class="box">
+            <div class="box" data-aos="fade-left" data-aos-duration="1000">
               <img
                 src="assets/illustrations/undraw_Relaxing_at_home_re_mror.svg"
               />
@@ -152,7 +170,7 @@
         </div>
         <div class="columns is-centered">
           <div class="column is-half has-text-centered">
-            <div class="box">
+            <div class="box" data-aos="fade-right" data-aos-duration="1000">
               <img
                 src="assets/illustrations/undraw_social_distancing_2g0u.svg"
               />
@@ -164,7 +182,7 @@
             </div>
           </div>
           <div class="column is-half has-text-centered">
-            <div class="box">
+            <div class="box" data-aos="fade-left" data-aos-duration="1000">
               <img
                 src="assets/illustrations/undraw_two_factor_authentication_namy.svg"
               />
@@ -184,45 +202,45 @@
         </div>
       </div>
     </section>
-    <section id="xray">
+    <section class="section information">
       <div class="container">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <br />
-            <h2>COVID Analyser tool</h2>
-            <p class="body1">Try out our COVID Detection ML model!</p>
+        <div class="columns is-desktop">
+          <div class="column">
+            <img src="assets/illustrations/undraw_security_o890.svg" />
+          </div>
+          <div class="column is-one-third">
+            <h2>Secure. Safe. Fast.</h2>
+            <p class="body1">
+              All your information at VaxU consisting of adhaar card and selfies
+              are kept secure using https protocol. We believe in security of
+              every individual on the app.
+            </p>
           </div>
         </div>
       </div>
     </section>
     <section class="section information">
       <div class="container">
-        <div class="columns">
-          <div class="column">
-            <i class="icon fa fa-line-chart fa-2x" aria-hidden="true"></i>
-            <h3>Get Prediction!</h3>
-            <p class="body2">
-              Your results should load automatically, just in case it doesn't
-              click on predict again.
+        <div class="columns is-desktop">
+          <div class="column is-hidden-desktop">
+            <img
+              src="assets/illustrations/undraw_Around_the_world_re_n353.svg"
+            />
+          </div>
+          <div class="column is-one-third">
+            <h2>Free for Everyone</h2>
+            <p class="body1">
+              VaxU is free for everyone! We believe that medical facilities
+              should be availabe to every individual in the hour of need. We
+              want to contribute to process of successful and fast vaccinations
+              of the country to make it COVID free! <br />
+              <br />
             </p>
           </div>
-          <div class="column">
-            <i class="icon fa fa-upload fa-2x" aria-hidden="true"></i>
-            <h3>Press upload button</h3>
-            <p class="body2">
-              Once you've found the image, it's right time to upload. While you
-              upload, sit back and wait for the results.
-            </p>
-          </div>
-          <div class="column">
-            <i class="icon fa fa-picture-o fa-2x" aria-hidden="true"></i>
-
-            <h3>Find X-Ray image</h3>
-            <p class="body2">
-              Find an X-Ray image of your chest from posteroanterior view to
-              upload. This picture is strongly suggested to be in
-              posteroanterior view.
-            </p>
+          <div class="column is-hidden-touch has-text-right">
+            <img
+              src="assets/illustrations/undraw_Around_the_world_re_n353.svg"
+            />
           </div>
         </div>
       </div>
@@ -231,7 +249,23 @@
       <div class="container">
         <div class="columns">
           <div class="column is-two-fifths is-hidden-mobile">
-            <span class="copyright"> Made by Team --- </span>
+            <span class="copyright"> © 2021 Team NEXA </span>
+            <br />
+            <br />
+            <br />
+
+            <span>Team Members: </span>
+            <br />
+            <span>Sahil Silare (2nd year CSE)</span>
+            <br />
+            <span>Prakhar Asaiya (2nd year CSE)</span>
+            <br />
+            <span>Siddharth Mishra (2nd year CSE)</span>
+            <br />
+            <span>Amitesh Agrawal (2nd year CSE)</span>
+          </div>
+          <div class="column">
+            NIT Raipur, GE Road, Raipur, Chhatissgarh (492007)
           </div>
           <div class="column has-text-right">
             <iframe
@@ -248,11 +282,64 @@
         </div>
       </div>
     </footer>
+    <script src="styles/jquery-3.5.1.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      $(window).on('load', function() {
-    $('#preloader').fadeOut();
-    $('#status').delay(350).fadeOut();
-});</script>
+      AOS.init();
+      AOS.init({
+        // Global settings:
+        disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+        startEvent: "DOMContentLoaded", // name of the event dispatched on the document, that AOS should initialize on
+        initClassName: "aos-init", // class applied after initialization
+        animatedClassName: "aos-animate", // class applied on animation
+        useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+        disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+        debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+        throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+        // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+        offset: 120, // offset (in px) from the original trigger point
+        delay: 0, // values from 0 to 3000, with step 50ms
+        duration: 400, // values from 0 to 3000, with step 50ms
+        easing: "ease", // default easing for AOS animations
+        once: true, // whether animation should happen only once - while scrolling down
+        mirror: false, // whether elements should animate out while scrolling past them
+        anchorPlacement: "top-bottom", // defines which position of the element regarding to window should trigger the animation
+      });
+    </script>
+    <script>
+      $(window).on("load", function () {
+        $("#preloader").fadeOut();
+        $("#status").delay(350).fadeOut();
+      });
+      $(document).ready(function () {
+        var previousScroll = 0;
+        $(window).scroll(function () {
+          var currentScroll = $(this).scrollTop();
+          if (currentScroll < 100) {
+            showTopNav();
+          } else if (
+            currentScroll > 0 &&
+            currentScroll < $(document).height() - $(window).height()
+          ) {
+            if (currentScroll > previousScroll) {
+              hideNav();
+            } else {
+              showNav();
+            }
+            previousScroll = currentScroll;
+          }
+        });
+
+        function hideNav() {
+          $(".navbar").addClass("is-invisible");
+        }
+
+        function showNav() {
+          $(".navbar").removeClass("is-invisible");
+        }
+      });
+    </script>
     <script src="styles/app.js"></script>
   </body>
 </html>
