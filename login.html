@@ -15,11 +15,16 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
     />
     <link rel="stylesheet" href="styles/styles.css" />
-    <script src="https://use.fontawesome.com/36f44874b6.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"
+    ></script>
   </head>
   <body>
-
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
@@ -66,7 +71,7 @@
         </div>
       </div>
     </nav>
-    <section class="first-three">
+    <!--<section class="first-three">
       <div class="container">
         <div class="field">
           <label class="label">Username</label>
@@ -98,24 +103,65 @@
               <button class="button is-success is-medium" onclick="trylogin()">Submit!</button>
         </div>
         </div>
-      </section>
-    <footer class="footer">
+      </section>-->
+    <div class="hero is-fullheight is-primary">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div class="column is-8 is-offset-2">
+            <h3 class="title has-text-white">Login</h3>
+            <hr class="login-hr" />
+            <p class="subtitle has-text-white">Please login to continue</p>
+            <div class="box">
+              <img src="assets/logo/VaxU_Logo.png" />
+            </div>
+            <div class="title has-text-grey is-5">
+              Enter your email and password below
+            </div>
+            <form>
+              <div class="field">
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    class="input is-medium"
+                    type="email"
+                    placeholder="Email"
+                    autofocus=""
+                    id="username"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <div class="control has-icons-left has-icons-right">
+                  <input
+                    class="input is-medium"
+                    type="password"
+                    placeholder="Password"
+                    id="password"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-password"></i>
+                  </span>
+                </div>
+              </div>
+            </form>
+            <label class="checkbox" style="margin: 20px">
+              <input type="checkbox" />
+              Remember Me
+            </label>
+            <button
+              class="button is-block is-danger is-large is-fullwidth"
+              onclick="trylogin()"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<footer class="footer">
       <div class="container">
         <div class="columns">
           <div class="column is-two-fifths is-hidden-mobile">
             <span class="copyright"> Made by Team --- </span>
-          </div>
-          <div class="column has-text-right">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.5489569646056!2d81.60284041448581!3d21.249727185574887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dde213f66723%3A0x21543965c50c43c7!2sNational%20Institute%20of%20Technology%2C%20Raipur!5e0!3m2!1sen!2sin!4v1612431218471!5m2!1sen!2sin"
-              width="500"
-              height="300"
-              frameborder="0"
-              style="border: 0"
-              allowfullscreen=""
-              aria-hidden="false"
-              tabindex="0"
-            ></iframe>
           </div>
         </div>
       </div>
